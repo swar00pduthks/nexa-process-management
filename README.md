@@ -3,7 +3,7 @@ Copy code
 # Event Correlation System
 
 ## Introduction
-The Event Correlation System is designed to process and correlate events from various upstream systems. It leverages Apache Kafka for event streaming and uses kafka (Event Data Framework) for event storage and retrieval. This documentation outlines the system architecture, data flow, configuration, and usage.
+The Event Correlation System is designed to process and correlate events from various upstream systems. It leverages Apache Kafka for event streaming and uses kafka (kafka) for event storage and retrieval. This documentation outlines the system architecture, data flow, configuration, and usage.
 
 ## Getting Started
 ### Prerequisites
@@ -121,7 +121,7 @@ Verify credentials and network access.
 References and Resources
 Kafka Documentation
 PostgreSQL Documentation
-Event Data Framework (kafka) Documentation
+kafka (kafka) Documentation
 Contributing
 We welcome contributions from the community! Please read the following guidelines before contributing:
 

@@ -1,0 +1,490 @@
+/* Nexa Business Process Management - Centralized Design System */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Color Palette - Nexa Lineage Design */
+  --nexa-primary: #111827;
+  --nexa-secondary: #374151;
+  --nexa-accent: #3b82f6;
+  --nexa-success: #10b981;
+  --nexa-warning: #f59e0b;
+  --nexa-error: #ef4444;
+  --nexa-info: #6b7280;
+  
+  /* Background Colors */
+  --nexa-bg-primary: #ffffff;
+  --nexa-bg-secondary: #f8fafc;
+  --nexa-bg-tertiary: #f3f4f6;
+  --nexa-bg-hover: #f9fafb;
+  
+  /* Border Colors */
+  --nexa-border-primary: #e5e7eb;
+  --nexa-border-secondary: #d1d5db;
+  
+  /* Text Colors */
+  --nexa-text-primary: #111827;
+  --nexa-text-secondary: #374151;
+  --nexa-text-muted: #6b7280;
+  --nexa-text-light: #9ca3af;
+  
+  /* Status Colors */
+  --nexa-status-completed: #10b981;
+  --nexa-status-in-progress: #3b82f6;
+  --nexa-status-failed: #ef4444;
+  --nexa-status-stuck: #f59e0b;
+  --nexa-status-pending: #6b7280;
+  
+  /* Spacing */
+  --nexa-spacing-xs: 0.25rem;
+  --nexa-spacing-sm: 0.5rem;
+  --nexa-spacing-md: 1rem;
+  --nexa-spacing-lg: 1.5rem;
+  --nexa-spacing-xl: 2rem;
+  --nexa-spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --nexa-radius-sm: 0.25rem;
+  --nexa-radius-md: 0.375rem;
+  --nexa-radius-lg: 0.5rem;
+  --nexa-radius-xl: 0.75rem;
+  
+  /* Shadows */
+  --nexa-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --nexa-shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --nexa-shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --nexa-shadow-xl: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
+  --nexa-shadow-2xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Typography */
+  --nexa-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  --nexa-font-size-xs: 0.75rem;
+  --nexa-font-size-sm: 0.875rem;
+  --nexa-font-size-base: 1rem;
+  --nexa-font-size-lg: 1.125rem;
+  --nexa-font-size-xl: 1.25rem;
+  --nexa-font-size-2xl: 1.5rem;
+  --nexa-font-size-3xl: 1.875rem;
+  
+  /* Font Weights */
+  --nexa-font-normal: 400;
+  --nexa-font-medium: 500;
+  --nexa-font-semibold: 600;
+  --nexa-font-bold: 700;
+  
+  /* Transitions */
+  --nexa-transition-fast: 0.15s ease;
+  --nexa-transition-normal: 0.2s ease;
+  --nexa-transition-slow: 0.3s ease;
+}
+
+/* ===== GLOBAL RESET ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--nexa-font-family);
+  font-size: var(--nexa-font-size-base);
+  line-height: 1.5;
+  color: var(--nexa-text-primary);
+  background-color: var(--nexa-bg-secondary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Layout */
+.nexa-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--nexa-spacing-xl);
+}
+
+.nexa-flex {
+  display: flex;
+}
+
+.nexa-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nexa-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nexa-grid {
+  display: grid;
+}
+
+.nexa-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.nexa-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.nexa-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.nexa-grid-cols-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* Spacing */
+.nexa-gap-xs { gap: var(--nexa-spacing-xs); }
+.nexa-gap-sm { gap: var(--nexa-spacing-sm); }
+.nexa-gap-md { gap: var(--nexa-spacing-md); }
+.nexa-gap-lg { gap: var(--nexa-spacing-lg); }
+.nexa-gap-xl { gap: var(--nexa-spacing-xl); }
+
+.nexa-p-xs { padding: var(--nexa-spacing-xs); }
+.nexa-p-sm { padding: var(--nexa-spacing-sm); }
+.nexa-p-md { padding: var(--nexa-spacing-md); }
+.nexa-p-lg { padding: var(--nexa-spacing-lg); }
+.nexa-p-xl { padding: var(--nexa-spacing-xl); }
+
+.nexa-m-xs { margin: var(--nexa-spacing-xs); }
+.nexa-m-sm { margin: var(--nexa-spacing-sm); }
+.nexa-m-md { margin: var(--nexa-spacing-md); }
+.nexa-m-lg { margin: var(--nexa-spacing-lg); }
+.nexa-m-xl { margin: var(--nexa-spacing-xl); }
+
+/* Typography */
+.nexa-text-xs { font-size: var(--nexa-font-size-xs); }
+.nexa-text-sm { font-size: var(--nexa-font-size-sm); }
+.nexa-text-base { font-size: var(--nexa-font-size-base); }
+.nexa-text-lg { font-size: var(--nexa-font-size-lg); }
+.nexa-text-xl { font-size: var(--nexa-font-size-xl); }
+.nexa-text-2xl { font-size: var(--nexa-font-size-2xl); }
+.nexa-text-3xl { font-size: var(--nexa-font-size-3xl); }
+
+.nexa-font-normal { font-weight: var(--nexa-font-normal); }
+.nexa-font-medium { font-weight: var(--nexa-font-medium); }
+.nexa-font-semibold { font-weight: var(--nexa-font-semibold); }
+.nexa-font-bold { font-weight: var(--nexa-font-bold); }
+
+.nexa-text-primary { color: var(--nexa-text-primary); }
+.nexa-text-secondary { color: var(--nexa-text-secondary); }
+.nexa-text-muted { color: var(--nexa-text-muted); }
+.nexa-text-light { color: var(--nexa-text-light); }
+
+/* Backgrounds */
+.nexa-bg-primary { background-color: var(--nexa-bg-primary); }
+.nexa-bg-secondary { background-color: var(--nexa-bg-secondary); }
+.nexa-bg-tertiary { background-color: var(--nexa-bg-tertiary); }
+
+/* Borders */
+.nexa-border { border: 1px solid var(--nexa-border-primary); }
+.nexa-border-secondary { border: 1px solid var(--nexa-border-secondary); }
+
+.nexa-rounded-sm { border-radius: var(--nexa-radius-sm); }
+.nexa-rounded-md { border-radius: var(--nexa-radius-md); }
+.nexa-rounded-lg { border-radius: var(--nexa-radius-lg); }
+.nexa-rounded-xl { border-radius: var(--nexa-radius-xl); }
+
+/* Shadows */
+.nexa-shadow-sm { box-shadow: var(--nexa-shadow-sm); }
+.nexa-shadow-md { box-shadow: var(--nexa-shadow-md); }
+.nexa-shadow-lg { box-shadow: var(--nexa-shadow-lg); }
+.nexa-shadow-xl { box-shadow: var(--nexa-shadow-xl); }
+.nexa-shadow-2xl { box-shadow: var(--nexa-shadow-2xl); }
+
+/* Status Colors */
+.nexa-status-completed { color: var(--nexa-status-completed); }
+.nexa-status-in-progress { color: var(--nexa-status-in-progress); }
+.nexa-status-failed { color: var(--nexa-status-failed); }
+.nexa-status-stuck { color: var(--nexa-status-stuck); }
+.nexa-status-pending { color: var(--nexa-status-pending); }
+
+/* ===== COMPONENT CLASSES ===== */
+
+/* Header */
+.nexa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--nexa-spacing-lg) var(--nexa-spacing-xl);
+  background: var(--nexa-bg-primary);
+  border-bottom: 1px solid var(--nexa-border-primary);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.nexa-header-left { flex: 1; }
+.nexa-header-center { flex: 2; text-align: center; }
+.nexa-header-right { flex: 1; display: flex; justify-content: flex-end; }
+
+/* Logo */
+.nexa-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-md);
+}
+
+.nexa-logo-icon {
+  font-size: var(--nexa-font-size-2xl);
+  color: var(--nexa-text-primary);
+}
+
+.nexa-logo-text h1 {
+  font-size: var(--nexa-font-size-3xl);
+  font-weight: var(--nexa-font-bold);
+  color: var(--nexa-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.nexa-logo-text p {
+  font-size: var(--nexa-font-size-sm);
+  color: var(--nexa-text-muted);
+  margin: var(--nexa-spacing-xs) 0 0 0;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.nexa-button {
+  background: none;
+  border: none;
+  font-size: var(--nexa-font-size-sm);
+  font-weight: var(--nexa-font-medium);
+  cursor: pointer;
+  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
+  border-radius: var(--nexa-radius-md);
+  transition: all var(--nexa-transition-normal);
+  color: var(--nexa-text-muted);
+}
+
+.nexa-button:hover {
+  color: var(--nexa-text-secondary);
+  background-color: var(--nexa-bg-tertiary);
+}
+
+.nexa-button-primary {
+  background-color: var(--nexa-secondary);
+  color: white;
+  border: 1px solid var(--nexa-secondary);
+}
+
+.nexa-button-primary:hover {
+  background-color: var(--nexa-primary);
+  color: white;
+}
+
+.nexa-button-close {
+  font-size: var(--nexa-font-size-xl);
+  padding: var(--nexa-spacing-sm);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cards */
+.nexa-card {
+  background: var(--nexa-bg-primary);
+  border-radius: var(--nexa-radius-lg);
+  box-shadow: var(--nexa-shadow-md);
+  padding: var(--nexa-spacing-lg);
+  border: 1px solid var(--nexa-border-primary);
+  transition: box-shadow var(--nexa-transition-normal);
+}
+
+.nexa-card:hover {
+  box-shadow: var(--nexa-shadow-lg);
+}
+
+.nexa-card-icon {
+  font-size: var(--nexa-font-size-xl);
+  color: var(--nexa-text-primary);
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.nexa-card-title {
+  font-size: var(--nexa-font-size-lg);
+  font-weight: var(--nexa-font-semibold);
+  color: var(--nexa-text-primary);
+  margin: 0 0 var(--nexa-spacing-sm) 0;
+}
+
+.nexa-card-description {
+  font-size: var(--nexa-font-size-sm);
+  color: var(--nexa-text-muted);
+  margin: 0 0 var(--nexa-spacing-lg) 0;
+  line-height: 1.5;
+}
+
+/* Badges */
+.nexa-badge {
+  background: var(--nexa-bg-tertiary);
+  color: var(--nexa-text-muted);
+  padding: var(--nexa-spacing-xs) var(--nexa-spacing-md);
+  border-radius: 1rem;
+  font-size: var(--nexa-font-size-xs);
+  font-weight: var(--nexa-font-medium);
+  border: 1px solid var(--nexa-border-primary);
+}
+
+.nexa-badge-status {
+  background: #fef3c7;
+  border-color: #fbbf24;
+}
+
+/* Progress Bars */
+.nexa-progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--nexa-bg-tertiary);
+  border-radius: var(--nexa-radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--nexa-spacing-sm);
+}
+
+.nexa-progress-fill {
+  height: 100%;
+  border-radius: var(--nexa-radius-sm);
+  transition: width var(--nexa-transition-slow);
+}
+
+.nexa-progress-text {
+  font-size: var(--nexa-font-size-xs);
+  color: var(--nexa-text-muted);
+}
+
+/* Inputs */
+.nexa-input {
+  width: 100%;
+  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
+  border: 1px solid var(--nexa-border-primary);
+  border-radius: var(--nexa-radius-md);
+  font-size: var(--nexa-font-size-sm);
+  color: var(--nexa-text-primary);
+  background-color: var(--nexa-bg-primary);
+  transition: border-color var(--nexa-transition-normal);
+}
+
+.nexa-input:focus {
+  outline: none;
+  border-color: var(--nexa-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Select */
+.nexa-select {
+  width: 100%;
+  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
+  border: 1px solid var(--nexa-border-primary);
+  border-radius: var(--nexa-radius-md);
+  font-size: var(--nexa-font-size-sm);
+  color: var(--nexa-text-primary);
+  background-color: var(--nexa-bg-primary);
+  cursor: pointer;
+  transition: border-color var(--nexa-transition-normal);
+}
+
+.nexa-select:focus {
+  outline: none;
+  border-color: var(--nexa-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ===== REACT FLOW CUSTOMIZATION ===== */
+.react-flow__node {
+  border-radius: var(--nexa-radius-lg);
+  border: 1px solid var(--nexa-border-primary);
+  background: var(--nexa-bg-primary);
+  box-shadow: var(--nexa-shadow-md);
+  transition: box-shadow var(--nexa-transition-normal);
+}
+
+.react-flow__node:hover {
+  box-shadow: var(--nexa-shadow-lg);
+}
+
+.react-flow__handle {
+  background: var(--nexa-secondary);
+  border: 2px solid var(--nexa-bg-primary);
+  width: 8px;
+  height: 8px;
+}
+
+.react-flow__edge-path {
+  stroke: var(--nexa-accent);
+  stroke-width: 2;
+}
+
+.react-flow__controls {
+  background: var(--nexa-bg-primary);
+  border: 1px solid var(--nexa-border-primary);
+  border-radius: var(--nexa-radius-lg);
+  box-shadow: var(--nexa-shadow-md);
+}
+
+.react-flow__controls-button {
+  background: var(--nexa-bg-primary);
+  border: none;
+  color: var(--nexa-text-muted);
+  padding: var(--nexa-spacing-sm);
+  border-radius: var(--nexa-radius-sm);
+}
+
+.react-flow__controls-button:hover {
+  background: var(--nexa-bg-tertiary);
+  color: var(--nexa-text-secondary);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .nexa-container {
+    padding: 0 var(--nexa-spacing-lg);
+  }
+  
+  .nexa-header {
+    flex-direction: column;
+    gap: var(--nexa-spacing-md);
+    padding: var(--nexa-spacing-md);
+  }
+  
+  .nexa-header-center {
+    order: 1;
+  }
+  
+  .nexa-header-left {
+    order: 2;
+    align-self: flex-start;
+  }
+  
+  .nexa-header-right {
+    order: 3;
+    align-self: flex-end;
+  }
+  
+  .nexa-grid-cols-auto {
+    grid-template-columns: 1fr;
+  }
+  
+  .nexa-logo-text h1 {
+    font-size: var(--nexa-font-size-2xl);
+  }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--nexa-bg-tertiary);
+  border-radius: var(--nexa-radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nexa-border-secondary);
+  border-radius: var(--nexa-radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nexa-text-muted);
+}

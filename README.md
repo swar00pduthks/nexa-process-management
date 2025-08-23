@@ -1,169 +1,169 @@
-markdown
-Copy code
-# Event Correlation System
+# Nexa Process Management
 
-## Introduction
-The Event Correlation System is designed to process and correlate events from various upstream systems. It leverages Apache Kafka for event streaming and uses kafka (kafka) for event storage and retrieval. This documentation outlines the system architecture, data flow, configuration, and usage.
+A comprehensive platform for business process orchestration, event correlation, and flow management across your data ecosystem.
 
-## Getting Started
+## 🌟 Features
+
+### 🏗️ Process Orchestrator
+- **Visual Process Design**: Create and visualize complex business processes
+- **Multi-phase Workflows**: Design hierarchical processes with phases and sub-phases
+- **Real-time Monitoring**: Track process execution and dependencies
+- **Elizabeth Line Style Layout**: Intuitive horizontal process visualization
+- **Statistics Dashboard**: Monitor process metrics and performance
+
+### 🔗 Event Correlation
+- **Real-time Event Monitoring**: Track events across your systems
+- **Pattern Detection**: Identify correlations in event data
+- **Anomaly Detection**: Alert on unusual event patterns
+- **Analytics Dashboard**: Analyze event trends and metrics
+
+### ⚡ Flow Builder
+- **Visual Flow Design**: Build data flows and transformations
+- **Node-based Interface**: Drag-and-drop flow construction
+- **Integration Support**: Connect various data sources and applications
+- **Rule Configuration**: Define business rules and logic
+
+### 📊 Dashboard
+- **Process Overview**: Monitor all active processes
+- **Performance Metrics**: Track key performance indicators
+- **Quick Actions**: Access frequently used features
+- **Status Monitoring**: Real-time status updates
+
+## 🚀 Getting Started
+
 ### Prerequisites
-- Java 11+
-- Kafka 2.8+
-- PostgreSQL 12+
+- Node.js (v16 or higher)
+- npm or yarn
 
 ### Installation
-#### Using Package Manager
-```bash
-# For example, if using Maven
-mvn install ...
-Building from Source
-bash
-Copy code
-git clone https://github.com/your-repo/event-correlation-system.git
-cd event-correlation-system
-mvn clean install
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd nexa-process-management
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:3001`
+
+## 📁 Project Structure
+
+```
+nexa-process-management/
+├── public/                 # Static assets
+├── src/
+│   ├── components/         # React components
+│   │   ├── nodes/         # ReactFlow node components
+│   │   ├── modals/        # Modal components
+│   │   └── sidebar/       # Sidebar components
+│   ├── App.js             # Main application component
+│   ├── App.css            # Application styles
+│   └── index.js           # Application entry point
+├── package.json           # Dependencies and scripts
+└── README.md             # Project documentation
 ```
 
-## Architecture
-#### Components
-- Other Upstreams: External systems that generate events.
-- kafka Topic: Kafka topic where events are published.
-- kafka event Service: Service that processes events according to cloud event standards.
-- kafka event Database: Storage for events processed by the kafka event Service.
-- Event Orchestration Service: Core component that manages event processing and correlation.
-- Correlation Store: Database storing correlation configuration and results.
-- Correlation API: API for interacting with correlation configurations and results.
+## 🛠️ Technology Stack
 
-#### Component Diagram
+- **Frontend**: React 18, React Router DOM
+- **UI Components**: Material-UI, AG Grid
+- **Flow Visualization**: ReactFlow
+- **Styling**: CSS3, Tailwind CSS (utility classes)
+- **Build Tool**: Create React App
 
-Each component is described in detail below:
+## 🌐 Available Routes
 
-- Other Upstreams: These systems generate events that are published to the kafka topic.
-- kafka Topic: A Kafka topic that acts as a buffer for incoming events.
-- kafka Service: Processes events from the kafka topic and stores them in the kafka Database.
-- kafka Database: Stores raw and processed event data.
-- Event Orchestration Service: Pulls events from the kafka topic, processes them based on stored configurations, and stores results in the Correlation Store.
-- Correlation Store: Stores configurations and correlated event results.
-- Correlation API: Provides endpoints for managing and retrieving correlation data.
+- **`/`** - Dashboard (main page)
+- **`/process-orchestrator`** - Process Orchestration
+- **`/event-correlation`** - Event Correlation
+- **`/flow-builder`** - Flow Builder
 
+## 🎨 Design System
 
-##### Data Flow
+The application follows the Nexa Design System with:
+- **Consistent Color Palette**: Professional dark/light themes
+- **Typography**: Clean, readable fonts
+- **Component Library**: Reusable UI components
+- **Responsive Design**: Mobile-friendly interface
 
-### Flow Diagram
+## 🔧 Development
 
-### Step-by-Step Flow Description
-- Event Generation: Events are generated by various upstream systems.
-- Event Publication: These events are published to the kafka Kafka topic.
-- Event Processing by kafka Service:
-- The kafka Service consumes events from the kafka topic.
-- Events are processed according to kafka rules and stored in the kafka Database.
-- Orchestration Service:
-- Consumes events from the kafka topic.
-- Uses stored configurations from the Correlation Store to correlate events.
-- Correlation results are stored back in the Correlation Store.
-### API Interaction:
-The Correlation API allows users to interact with correlation configurations.
-Users can query correlated event data and manage configurations.
-Configuration
-Configuration Files
-config.yaml: Main configuration file for the system.
-kafka.bootstrap.servers: Kafka broker addresses.
-kafka.topic: Kafka topic name.
-db.connection.string: Database connection string for kafka and Correlation stores.
-##### Sample Configuration
-yaml
+### Available Scripts
 
-kafka:
-  bootstrap.servers: "localhost:9092"
-  topic: "kafka-topic"
+- `npm start` - Start development server
+- `npm build` - Build for production
+- `npm test` - Run tests
+- `npm eject` - Eject from Create React App
 
-db:
-  kafka.connection.string: "jdbc:postgresql://localhost:5432/kafka"
-  correlation.connection.string: "jdbc:postgresql://localhost:5432/correlation"
-#### Using the Component
-Starting the Services
-Start Kafka:
-bash
+### Code Style
 
-kafka-server-start.sh config/server.properties
-Start kafka Service:
-bash
+- Follow React best practices
+- Use functional components with hooks
+- Implement proper error handling
+- Add comprehensive logging
 
-java -jar kafka-service.jar --config config.yaml
-Start Event Orchestration Service:
-bash
+## 📈 Key Features
 
-java -jar event-orchestration-service.jar --config config.yaml
-Interacting with the API
+### Process Orchestration
+- **Hierarchical Process Design**: Create complex multi-level processes
+- **Visual Process Flow**: Intuitive drag-and-drop interface
+- **Real-time Statistics**: Monitor process performance
+- **Test Process Generation**: Built-in sample processes for testing
 
-Check System Status:
+### Event Correlation
+- **Event Monitoring**: Track events across systems
+- **Pattern Recognition**: Identify event correlations
+- **Alert System**: Notify on anomalies
+- **Analytics**: Comprehensive event analysis
 
-Copy code
-curl -X GET http://localhost:8080/api/v1/status
-Query Correlated Events:
+### Flow Builder
+- **Visual Flow Design**: Build data transformation flows
+- **Node Library**: Pre-built transformation nodes
+- **Integration Support**: Connect to various data sources
+- **Rule Engine**: Define business logic and rules
 
-curl -X GET http://localhost:8080/api/v1/correlations
+## 🤝 Contributing
 
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-##### Troubleshooting
+## 📄 License
 
-
-#########Common Issues
-- Kafka Connection Error: Ensure Kafka is running and the bootstrap.servers configuration is correct.
-- Database Connection Error: Verify the database connection strings and ensure the databases are accessible.
-  - Solutions
-    - Kafka Connection Error:
-      Check Kafka server status.
-      Validate network connectivity to Kafka brokers.
-      Database Connection Error:
-Ensure the database server is running.
-Verify credentials and network access.
-References and Resources
-Kafka Documentation
-PostgreSQL Documentation
-kafka (kafka) Documentation
-Contributing
-We welcome contributions from the community! Please read the following guidelines before contributing:
-
-How to Contribute
-Fork the repository: Click the "Fork" button at the top of the project page.
-Clone your fork:
-bash
-Copy code
-git clone https://github.com/your-username/event-correlation-system.git
-Create a branch:
-bash
-Copy code
-git checkout -b feature/your-feature-name
-Make your changes: Implement your feature or bugfix.
-Commit your changes:
-bash
-Copy code
-git commit -m "Description of your changes"
-Push to your branch:
-bash
-Copy code
-git push origin feature/your-feature-name
-Create a Pull Request: Navigate to your fork on GitHub and create a pull request to the main repository.
-Code of Conduct
-Please adhere to the Code of Conduct in all interactions with the community.
-
-License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-Changelog
-v1.0.0
-Initial release with core functionality.
-v1.1.0
-Added feature X.
-Improved performance of Y.
-Community and Support
-Join our community to stay updated and get support:
+## 🆘 Support
 
-Slack Channel
-Mailing List
-GitHub Issues
-Credits
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation
+
+## 🔄 Version History
+
+- **v1.0.0** - Initial release with core features
+  - Process Orchestration
+  - Event Correlation
+  - Flow Builder
+  - Dashboard
+  - URL Routing
+  - Consistent Design System
+
+---
+
+**Nexa Process Management** - Empowering your business processes with intelligent orchestration and monitoring.
 
 
 

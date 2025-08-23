@@ -1,0 +1,504 @@
+/* Process Journey Viewer - Using Centralized Design System */
+
+.journey-viewer {
+  min-height: 100vh;
+  background-color: var(--nexa-bg-secondary);
+  font-family: var(--nexa-font-family);
+}
+
+/* Header - Using Centralized Design System */
+.journey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--nexa-spacing-lg) var(--nexa-spacing-xl);
+  background: var(--nexa-bg-primary);
+  border-bottom: 1px solid var(--nexa-border-primary);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.header-left {
+  flex: 1;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--nexa-text-muted);
+  font-size: var(--nexa-font-size-sm);
+  font-weight: var(--nexa-font-medium);
+  cursor: pointer;
+  padding: var(--nexa-spacing-sm) 0;
+  transition: color var(--nexa-transition-normal);
+}
+
+.back-button:hover {
+  color: var(--nexa-text-secondary);
+}
+
+.header-center {
+  flex: 2;
+  text-align: center;
+}
+
+.journey-title {
+  font-size: var(--nexa-font-size-2xl);
+  font-weight: var(--nexa-font-semibold);
+  color: var(--nexa-text-primary);
+  margin: 0 0 var(--nexa-spacing-md) 0;
+}
+
+.journey-context {
+  display: flex;
+  justify-content: center;
+  gap: var(--nexa-spacing-md);
+  flex-wrap: wrap;
+}
+
+.context-badge {
+  background: var(--nexa-bg-tertiary);
+  color: var(--nexa-text-muted);
+  padding: var(--nexa-spacing-xs) var(--nexa-spacing-md);
+  border-radius: 1rem;
+  font-size: var(--nexa-font-size-xs);
+  font-weight: var(--nexa-font-medium);
+  border: 1px solid var(--nexa-border-primary);
+}
+
+.status-badge {
+  background: #fef3c7;
+  border-color: #fbbf24;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-md);
+}
+
+.action-button {
+  background: none;
+  border: none;
+  font-size: var(--nexa-font-size-xl);
+  cursor: pointer;
+  padding: var(--nexa-spacing-sm);
+  border-radius: var(--nexa-radius-md);
+  transition: background-color var(--nexa-transition-normal);
+}
+
+.action-button:hover {
+  background-color: var(--nexa-bg-tertiary);
+}
+
+.status-indicator {
+  font-size: var(--nexa-font-size-sm);
+  font-weight: var(--nexa-font-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-xs);
+}
+
+/* Flow Container */
+.flow-container {
+  height: calc(100vh - 120px);
+  background: linear-gradient(135deg, var(--nexa-bg-secondary) 0%, #e2e8f0 100%);
+  position: relative;
+}
+
+/* React Flow Customization */
+.react-flow__node {
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.react-flow__node:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.react-flow__handle {
+  background: #374151;
+  border: 2px solid white;
+  width: 8px;
+  height: 8px;
+}
+
+.react-flow__edge-path {
+  stroke: #3b82f6;
+  stroke-width: 2;
+}
+
+.react-flow__controls {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.react-flow__controls-button {
+  background: white;
+  border: none;
+  color: #6b7280;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.react-flow__controls-button:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Calculator Popup */
+.calculator-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--nexa-spacing-xl);
+}
+
+.calculator-popup {
+  background: var(--nexa-bg-primary);
+  border-radius: var(--nexa-radius-xl);
+  box-shadow: var(--nexa-shadow-2xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--nexa-spacing-lg);
+  border-bottom: 1px solid var(--nexa-border-primary);
+  background: var(--nexa-bg-tertiary);
+}
+
+.popup-header h2 {
+  font-size: var(--nexa-font-size-xl);
+  font-weight: var(--nexa-font-semibold);
+  color: var(--nexa-text-primary);
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: var(--nexa-font-size-xl);
+  color: var(--nexa-text-muted);
+  cursor: pointer;
+  padding: var(--nexa-spacing-sm);
+  border-radius: var(--nexa-radius-md);
+  transition: all var(--nexa-transition-normal);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background-color: var(--nexa-bg-tertiary);
+  color: var(--nexa-text-secondary);
+}
+
+.popup-content {
+  padding: var(--nexa-spacing-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.phase-info {
+  margin-bottom: var(--nexa-spacing-lg);
+}
+
+.phase-meta {
+  display: flex;
+  gap: var(--nexa-spacing-xl);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-sm);
+  font-size: var(--nexa-font-size-sm);
+  color: var(--nexa-text-secondary);
+}
+
+.meta-item strong {
+  color: var(--nexa-text-primary);
+  font-weight: var(--nexa-font-semibold);
+}
+
+/* Calculators Grid */
+.calculators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--nexa-spacing-md);
+}
+
+.calculator-card {
+  background: var(--nexa-bg-primary);
+  border: 1px solid var(--nexa-border-primary);
+  border-radius: var(--nexa-radius-lg);
+  padding: var(--nexa-spacing-md);
+  box-shadow: var(--nexa-shadow-md);
+  transition: box-shadow var(--nexa-transition-normal);
+}
+
+.calculator-card:hover {
+  box-shadow: var(--nexa-shadow-lg);
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.calculator-name {
+  font-size: var(--nexa-font-size-base);
+  font-weight: var(--nexa-font-semibold);
+  color: var(--nexa-text-primary);
+}
+
+.calculator-status {
+  font-size: var(--nexa-font-size-xs);
+  font-weight: var(--nexa-font-medium);
+  text-transform: capitalize;
+}
+
+.calculator-progress {
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--nexa-bg-tertiary);
+  border-radius: var(--nexa-radius-sm);
+  overflow: hidden;
+  margin-bottom: var(--nexa-spacing-sm);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--nexa-radius-sm);
+  transition: width var(--nexa-transition-slow);
+}
+
+.progress-text {
+  font-size: var(--nexa-font-size-xs);
+  color: var(--nexa-text-muted);
+}
+
+.calculator-timing {
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-sm);
+  font-size: var(--nexa-font-size-xs);
+}
+
+.timing-label {
+  color: var(--nexa-text-muted);
+  font-weight: var(--nexa-font-medium);
+}
+
+.timing-value {
+  color: var(--nexa-text-secondary);
+  font-family: monospace;
+}
+
+/* Journey Phase Node Styling */
+.journey-phase-node {
+  background: var(--nexa-bg-primary);
+  border: 2px solid var(--nexa-border-primary);
+  border-radius: var(--nexa-radius-lg);
+  padding: var(--nexa-spacing-md);
+  min-width: 200px;
+  box-shadow: var(--nexa-shadow-md);
+  transition: all var(--nexa-transition-normal);
+  cursor: pointer;
+}
+
+.journey-phase-node:hover {
+  box-shadow: var(--nexa-shadow-xl);
+  transform: translateY(-2px);
+}
+
+.journey-phase-node.completed {
+  border-color: var(--nexa-status-completed);
+  background: #f0fdf4;
+}
+
+.journey-phase-node.in-progress {
+  border-color: var(--nexa-status-in-progress);
+  background: #eff6ff;
+}
+
+.journey-phase-node.failed {
+  border-color: var(--nexa-status-failed);
+  background: #fef2f2;
+}
+
+.journey-phase-node.stuck {
+  border-color: var(--nexa-status-stuck);
+  background: #fffbeb;
+}
+
+.journey-phase-node.pending {
+  border-color: var(--nexa-status-pending);
+  background: #f9fafb;
+}
+
+.node-content {
+  position: relative;
+}
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: var(--nexa-spacing-md);
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.phase-marker {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--nexa-font-size-base);
+}
+
+.phase-info {
+  flex: 1;
+}
+
+.phase-name {
+  font-size: var(--nexa-font-size-base);
+  font-weight: var(--nexa-font-semibold);
+  color: var(--nexa-text-primary);
+  margin-bottom: var(--nexa-spacing-xs);
+}
+
+.phase-status {
+  font-size: var(--nexa-font-size-xs);
+  font-weight: var(--nexa-font-medium);
+  text-transform: capitalize;
+}
+
+.phase-progress {
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.phase-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nexa-spacing-sm);
+  margin-bottom: var(--nexa-spacing-md);
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--nexa-font-size-xs);
+}
+
+.meta-label {
+  color: var(--nexa-text-muted);
+  font-weight: var(--nexa-font-medium);
+}
+
+.meta-value {
+  color: var(--nexa-text-secondary);
+  font-weight: var(--nexa-font-semibold);
+}
+
+.click-hint {
+  text-align: center;
+  font-size: var(--nexa-font-size-xs);
+  color: var(--nexa-text-muted);
+  font-style: italic;
+  margin-top: var(--nexa-spacing-sm);
+  padding-top: var(--nexa-spacing-sm);
+  border-top: 1px solid var(--nexa-bg-tertiary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .journey-header {
+    flex-direction: column;
+    gap: var(--nexa-spacing-md);
+    padding: var(--nexa-spacing-md);
+  }
+  
+  .header-center {
+    order: 1;
+  }
+  
+  .header-left {
+    order: 2;
+    align-self: flex-start;
+  }
+  
+  .header-right {
+    order: 3;
+    align-self: flex-end;
+  }
+  
+  .journey-context {
+    justify-content: center;
+  }
+  
+  .flow-container {
+    height: calc(100vh - 180px);
+  }
+  
+  .calculator-popup-overlay {
+    padding: var(--nexa-spacing-md);
+  }
+  
+  .calculator-popup {
+    max-height: 90vh;
+  }
+  
+  .popup-header {
+    padding: var(--nexa-spacing-md);
+  }
+  
+  .popup-content {
+    padding: var(--nexa-spacing-md);
+  }
+  
+  .calculators-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .phase-meta {
+    flex-direction: column;
+    gap: var(--nexa-spacing-md);
+  }
+}

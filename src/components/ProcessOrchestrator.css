@@ -1,0 +1,350 @@
+.process-orchestrator {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--nexa-bg-primary);
+  font-family: var(--nexa-font-family);
+}
+
+.orchestrator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid var(--nexa-border-color);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.orchestrator-header h2 {
+  margin: 0;
+  color: var(--nexa-text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.process-action-btn {
+  background: var(--nexa-text-secondary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--nexa-radius-lg);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--nexa-transition-normal);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.process-action-btn:hover {
+  background: var(--nexa-text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--nexa-shadow-md);
+}
+
+.create-process-btn {
+  background: var(--nexa-text-secondary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--nexa-radius-lg);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--nexa-transition-normal);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.create-process-btn:hover {
+  background: var(--nexa-text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--nexa-shadow-md);
+}
+
+.flow-container {
+  flex: 1;
+  position: relative;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+/* Full-Screen Modal Styles */
+.process-builder-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.process-builder-modal {
+  background: white;
+  border-radius: var(--nexa-radius-lg);
+  box-shadow: var(--nexa-shadow-lg);
+  border: 1px solid var(--nexa-border-color);
+  width: 95%;
+  height: 95%;
+  max-width: 1400px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.process-builder-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--nexa-border-color);
+  background: white;
+}
+
+.process-builder-modal .modal-header h3 {
+  margin: 0;
+  color: var(--nexa-text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.process-builder-modal .modal-close {
+  background: white;
+  color: var(--nexa-error);
+  border: 1px solid var(--nexa-error);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--nexa-transition-normal);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.process-builder-modal .modal-close:hover {
+  background: var(--nexa-error);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: var(--nexa-shadow-md);
+}
+
+.process-builder-modal .modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.process-builder-modal .process-builder {
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  backdrop-filter: none;
+  border: none;
+}
+
+.process-summary {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: white;
+  border-radius: var(--nexa-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--nexa-shadow-lg);
+  border: 1px solid var(--nexa-border-color);
+  max-width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.process-summary h3 {
+  margin: 0 0 1rem 0;
+  color: var(--nexa-text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.process-summary pre {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--nexa-text-secondary);
+  background: var(--nexa-bg-secondary);
+  padding: 1rem;
+  border-radius: var(--nexa-radius-lg);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid var(--nexa-border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .orchestrator-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .orchestrator-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .create-process-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .process-builder-modal {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+  }
+
+  .process-builder-modal .modal-header {
+    padding: 1rem;
+  }
+
+  .process-builder-modal .modal-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .process-summary {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+}
+
+/* Phase Tasks Modal Styles */
+.phase-tasks-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.phase-tasks-modal {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--nexa-radius-lg);
+  box-shadow: var(--nexa-shadow-lg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 90%;
+  max-width: 1200px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.phase-tasks-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(30, 60, 114, 0.1);
+}
+
+.phase-tasks-modal .modal-header h3 {
+  margin: 0;
+  color: var(--nexa-text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.phase-tasks-modal .modal-close {
+  background: white;
+  border: 1px solid var(--nexa-border-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--nexa-text-secondary);
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: var(--nexa-transition-normal);
+  box-shadow: var(--nexa-shadow-sm);
+}
+
+.phase-tasks-modal .modal-close:hover {
+  background: var(--nexa-bg-hover);
+  color: var(--nexa-text-primary);
+  border-color: var(--nexa-primary);
+  box-shadow: var(--nexa-shadow-md);
+}
+
+.phase-tasks-modal .modal-content {
+  padding: 1.5rem;
+}
+
+.phase-info {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(248, 249, 250, 0.9);
+  border-radius: var(--nexa-radius-lg);
+  border: 1px solid rgba(30, 60, 114, 0.1);
+}
+
+.phase-info p {
+  margin: 0.5rem 0;
+  color: var(--nexa-text-primary);
+  font-size: 0.9rem;
+}
+
+/* AG Grid Customization for Nexa Design */
+.ag-theme-alpine {
+  --ag-header-background-color: var(--nexa-bg-secondary);
+  --ag-header-foreground-color: var(--nexa-text-primary);
+  --ag-row-hover-color: var(--nexa-bg-hover);
+  --ag-selected-row-background-color: var(--nexa-primary);
+  --ag-font-family: var(--nexa-font-family);
+  --ag-font-size: 0.875rem;
+  --ag-border-color: var(--nexa-border-color);
+  --ag-row-border-color: var(--nexa-border-color);
+  --ag-cell-horizontal-border: solid var(--nexa-border-color);
+  --ag-row-height: 40px;
+  --ag-header-height: 45px;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  font-weight: 600;
+  color: var(--nexa-text-primary);
+}
+
+.ag-theme-alpine .ag-cell {
+  color: var(--nexa-text-primary);
+}
+
+@media (max-width: 768px) {
+  .phase-tasks-modal {
+    width: 95%;
+    margin: 1rem;
+  }
+}

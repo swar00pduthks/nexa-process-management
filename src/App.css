@@ -1,0 +1,255 @@
+/* Main App Layout */
+.App {
+  min-height: 100vh;
+  background: var(--nexa-bg-primary);
+  color: var(--nexa-text-primary);
+  font-family: var(--nexa-font-family);
+}
+
+/* Header Styles */
+.app-header {
+  background: var(--nexa-bg-secondary);
+  border-bottom: 1px solid var(--nexa-border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nexa-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nexa-logo-svg {
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo-text h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--nexa-text-primary);
+}
+
+.logo-text p {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--nexa-text-secondary);
+}
+
+/* Navigation Styles */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--nexa-border-color);
+  background: var(--nexa-bg-primary);
+  color: var(--nexa-text-primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  background: var(--nexa-bg-hover);
+  border-color: var(--nexa-primary);
+  text-decoration: none;
+  color: var(--nexa-text-primary);
+}
+
+.nav-item.active {
+  background: var(--nexa-primary);
+  color: white;
+  border-color: var(--nexa-primary);
+}
+
+.nav-icon {
+  font-size: 1rem;
+}
+
+.nav-label {
+  font-weight: 500;
+}
+
+.theme-toggle {
+  padding: 0.5rem;
+  border: 1px solid var(--nexa-border-color);
+  background: var(--nexa-bg-primary);
+  color: var(--nexa-text-primary);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--nexa-bg-hover);
+}
+
+/* Main Content Area */
+.app-main {
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Card Styles */
+.card {
+  background: var(--nexa-bg-secondary);
+  border: 1px solid var(--nexa-border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--nexa-text-primary);
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: var(--nexa-text-secondary);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--nexa-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--nexa-primary-dark);
+}
+
+.btn-secondary {
+  background: var(--nexa-bg-hover);
+  color: var(--nexa-text-primary);
+  border: 1px solid var(--nexa-border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--nexa-bg-tertiary);
+}
+
+.btn-success {
+  background: var(--nexa-success);
+  color: white;
+}
+
+.btn-success:hover {
+  background: var(--nexa-success-dark);
+}
+
+.btn-warning {
+  background: var(--nexa-warning);
+  color: white;
+}
+
+.btn-warning:hover {
+  background: var(--nexa-warning-dark);
+}
+
+.btn-danger {
+  background: var(--nexa-danger);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: var(--nexa-danger-dark);
+}
+
+/* Status Indicators */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-running {
+  background: var(--nexa-info-bg);
+  color: var(--nexa-info);
+}
+
+.status-completed {
+  background: var(--nexa-success-bg);
+  color: var(--nexa-success);
+}
+
+.status-failed {
+  background: var(--nexa-danger-bg);
+  color: var(--nexa-danger);
+}
+
+.status-pending {
+  background: var(--nexa-warning-bg);
+  color: var(--nexa-warning);
+}
+
+.status-stuck {
+  background: var(--nexa-warning-bg);
+  color: var(--nexa-warning);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .view-selector {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .main-content {
+    height: calc(100vh - 160px);
+  }
+}

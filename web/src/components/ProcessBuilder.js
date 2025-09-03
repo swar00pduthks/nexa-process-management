@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProcessBuilder.css';
 
 const ProcessBuilder = ({ onProcessGenerated }) => {
@@ -9,6 +9,92 @@ const ProcessBuilder = ({ onProcessGenerated }) => {
   const [selectedPhase, setSelectedPhase] = useState(null);
   const [showCorrelationModal, setShowCorrelationModal] = useState(false);
   const [showActionModal, setShowActionModal] = useState(false);
+  const [savedConfigs, setSavedConfigs] = useState([]);
+  const [showLoadModal, setShowLoadModal] = useState(false);
+  const [currentConfigId, setCurrentConfigId] = useState(null);
+
+  // Load saved configurations from localStorage on component mount
+  useEffect(() => {
+    const saved = localStorage.getItem('processConfigs');
+    if (saved) {
+      try {
+        setSavedConfigs(JSON.parse(saved));
+      } catch (error) {
+        console.error('Error loading saved configurations:', error);
+      }
+    }
+  }, []);
+
+  // Save configurations to localStorage whenever savedConfigs changes
+  useEffect(() => {
+    localStorage.setItem('processConfigs', JSON.stringify(savedConfigs));
+  }, [savedConfigs]);
+
+  const saveCurrentConfig = () => {
+    if (!processName.trim()) {
+      alert('Please enter a process name before saving.');
+      return;
+    }
+
+    const config = {
+      id: currentConfigId || Date.now().toString(),
+      name: processName,
+      description: processDescription,
+      phases: phases,
+      calculators: calculators,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+
+    const updatedConfigs = currentConfigId 
+      ? savedConfigs.map(c => c.id === currentConfigId ? config : c)
+      : [...savedConfigs, config];
+
+    setSavedConfigs(updatedConfigs);
+    setCurrentConfigId(config.id);
+    
+    // Show success message
+    alert(`Process "${processName}" saved successfully!`);
+  };
+
+  const loadConfig = (configId) => {
+    const config = savedConfigs.find(c => c.id === configId);
+    if (config) {
+      setProcessName(config.name);
+      setProcessDescription(config.description);
+      setPhases(config.phases || []);
+      setCalculators(config.calculators || []);
+      setCurrentConfigId(config.id);
+      setShowLoadModal(false);
+      
+      // Generate the process for display
+      handleProcessGenerated();
+    }
+  };
+
+  const deleteConfig = (configId) => {
+    if (confirm('Are you sure you want to delete this configuration?')) {
+      const updatedConfigs = savedConfigs.filter(c => c.id !== configId);
+      setSavedConfigs(updatedConfigs);
+      
+      if (currentConfigId === configId) {
+        setCurrentConfigId(null);
+        setProcessName('');
+        setProcessDescription('');
+        setPhases([]);
+        setCalculators([]);
+      }
+    }
+  };
+
+  const createNewConfig = () => {
+    setCurrentConfigId(null);
+    setProcessName('');
+    setProcessDescription('');
+    setPhases([]);
+    setCalculators([]);
+    setShowLoadModal(false);
+  };
 
   const availableCalculators = [
     { 
@@ -464,10 +550,10 @@ const ProcessBuilder = ({ onProcessGenerated }) => {
           </div>
           
           <div className="modal-actions">
-            <button onClick={() => onSave(conditions)} className="save-btn">
-              Save Conditions
+            <button onClick={() => onSave(conditions)} className="modal-btn modal-btn-primary">
+              💾 Save Conditions
             </button>
-            <button onClick={onCancel} className="cancel-btn">
+            <button onClick={onCancel} className="modal-btn modal-btn-secondary">
               Cancel
             </button>
           </div>
@@ -704,10 +790,10 @@ const ProcessBuilder = ({ onProcessGenerated }) => {
           </div>
           
           <div className="modal-actions">
-            <button onClick={() => onSave(action)} className="save-btn">
-              Save Action
+            <button onClick={() => onSave(action)} className="modal-btn modal-btn-primary">
+              💾 Save Action
             </button>
-            <button onClick={onCancel} className="cancel-btn">
+            <button onClick={onCancel} className="modal-btn modal-btn-secondary">
               Cancel
             </button>
           </div>
@@ -719,7 +805,17 @@ const ProcessBuilder = ({ onProcessGenerated }) => {
   return (
     <div className="process-builder">
       <div className="builder-section">
-        <h3>🏗️ Process Builder</h3>
+        <div className="section-header">
+          <h3>🏗️ Process Builder</h3>
+          <div className="header-actions">
+            <button onClick={() => setShowLoadModal(true)} className="load-btn">
+              📂 Load Process
+            </button>
+            <button onClick={saveCurrentConfig} className="save-btn">
+              💾 Save Process
+            </button>
+          </div>
+        </div>
         
         <div className="process-info">
           <div className="input-group">
@@ -743,6 +839,72 @@ const ProcessBuilder = ({ onProcessGenerated }) => {
           </div>
         </div>
       </div>
+
+      {/* Load Configuration Modal */}
+      {showLoadModal && (
+        <div className="correlation-modal-overlay">
+          <div className="correlation-modal">
+            <div className="modal-header">
+              <h3>📂 Load Process Configuration</h3>
+              <button onClick={() => setShowLoadModal(false)} className="modal-close">×</button>
+            </div>
+            
+            <div className="modal-content">
+              <div className="condition-section">
+                <h4>Saved Configurations</h4>
+                <p className="section-description">
+                  Select a saved process configuration to load:
+                </p>
+                
+                {savedConfigs.length === 0 ? (
+                  <div className="empty-state">
+                    <p>No saved configurations found. Create and save a process first!</p>
+                  </div>
+                ) : (
+                  <div className="saved-configs-list">
+                    {savedConfigs.map((config) => (
+                      <div key={config.id} className="saved-config-item">
+                        <div className="config-info">
+                          <h5>{config.name}</h5>
+                          <p>{config.description || 'No description'}</p>
+                          <small>
+                            Created: {new Date(config.createdAt).toLocaleDateString()} | 
+                            Updated: {new Date(config.updatedAt).toLocaleDateString()} |
+                            Phases: {config.phases?.length || 0}
+                          </small>
+                        </div>
+                        <div className="config-actions">
+                          <button 
+                            onClick={() => loadConfig(config.id)}
+                            className="modal-btn modal-btn-primary"
+                          >
+                            📂 Load
+                          </button>
+                          <button 
+                            onClick={() => deleteConfig(config.id)}
+                            className="modal-btn modal-btn-secondary"
+                          >
+                            🗑️ Delete
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="modal-actions">
+              <button onClick={createNewConfig} className="modal-btn modal-btn-primary">
+                ✨ Create New
+              </button>
+              <button onClick={() => setShowLoadModal(false)} className="modal-btn modal-btn-secondary">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="builder-section">
         <div className="section-header">

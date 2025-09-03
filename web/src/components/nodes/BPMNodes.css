@@ -1,424 +1,333 @@
-/* BPM Node Components - Nexa Design System */
+/* ===== BPM NODE COMPONENTS - CENTRALIZED DESIGN SYSTEM ===== */
 
-/* ===== BASE NODE STYLES ===== */
-.bpm-node {
-  min-width: 200px;
-  max-width: 300px;
-  background: var(--nexa-bg-primary);
-  border: 2px solid var(--nexa-border-primary);
-  border-radius: var(--nexa-radius-lg);
-  box-shadow: var(--nexa-shadow-md);
-  padding: var(--nexa-spacing-md);
-  transition: all var(--nexa-transition-normal);
-  position: relative;
-  font-family: var(--nexa-font-family);
+/* ===== BASE NODE STYLES - CENTRALIZED ===== */
+.bpm-node,
+.bpm-start-node,
+.bpm-end-node,
+.bpm-task-node,
+.bpm-gateway-node,
+.bpm-event-node,
+.bpm-subprocess-node {
+  min-width: 200px !important;
+  max-width: 300px !important;
+  background: #111827 !important; /* Black background */
+  border: 2px solid #374151 !important; /* Dark gray border */
+  border-radius: 8px !important; /* Consistent radius */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important; /* Consistent shadow */
+  padding: 1rem !important;
+  transition: all 0.2s ease !important;
+  position: relative !important;
+  font-family: var(--nexa-font-family) !important;
+  color: #ffffff !important; /* White text */
 }
 
-.bpm-node:hover {
-  box-shadow: var(--nexa-shadow-lg);
-  border-color: var(--nexa-accent);
-  transform: translateY(-2px);
+.bpm-node:hover,
+.bpm-start-node:hover,
+.bpm-end-node:hover,
+.bpm-task-node:hover,
+.bpm-gateway-node:hover,
+.bpm-event-node:hover,
+.bpm-subprocess-node:hover {
+  background: #374151 !important; /* Darker gray on hover */
+  border-color: #4b5563 !important; /* Lighter border on hover */
+  transform: translateY(-1px) !important; /* Consistent hover effect */
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
-.bpm-node.selected {
-  border-color: var(--nexa-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+.bpm-node.selected,
+.bpm-start-node.selected,
+.bpm-end-node.selected,
+.bpm-task-node.selected,
+.bpm-gateway-node.selected,
+.bpm-event-node.selected,
+.bpm-subprocess-node.selected {
+  border-color: #3b82f6 !important; /* Blue border when selected */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important; /* Blue ring */
 }
 
-/* ===== NODE HEADER ===== */
+/* ===== NODE HEADER - CENTRALIZED ===== */
 .bpm-node-header {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-sm);
-  margin-bottom: var(--nexa-spacing-sm);
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 .bpm-node-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--nexa-radius-md);
-  background: var(--nexa-bg-tertiary);
-  flex-shrink: 0;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 4px !important;
+  background: rgba(255, 255, 255, 0.1) !important; /* Subtle white background */
+  flex-shrink: 0 !important;
 }
 
 .bpm-node-icon .bpm-icon {
-  font-size: var(--nexa-font-size-lg);
-  line-height: 1;
+  font-size: 1.125rem !important;
+  line-height: 1 !important;
+  color: #ffffff !important; /* White icons */
 }
 
 .bpm-node-title {
-  font-size: var(--nexa-font-size-sm);
-  font-weight: var(--nexa-font-semibold);
-  color: var(--nexa-text-primary);
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: #ffffff !important; /* White text */
+  flex: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
 
 .bpm-node-priority {
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
 }
 
 .bpm-priority-badge {
-  display: inline-block;
-  padding: var(--nexa-spacing-xs) var(--nexa-spacing-sm);
-  background: var(--nexa-warning);
-  color: white;
-  border-radius: var(--nexa-radius-sm);
-  font-size: var(--nexa-font-size-xs);
-  font-weight: var(--nexa-font-medium);
+  display: inline-block !important;
+  padding: 0.25rem 0.5rem !important;
+  background: #f59e0b !important; /* Warning color */
+  color: #ffffff !important; /* White text */
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
 }
 
 .bpm-gateway-type {
-  font-size: var(--nexa-font-size-xs);
-  color: var(--nexa-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: var(--nexa-font-medium);
+  font-size: 0.75rem !important;
+  color: rgba(255, 255, 255, 0.8) !important; /* Slightly transparent white */
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-weight: 500 !important;
 }
 
-/* ===== NODE CONTENT ===== */
+/* ===== NODE CONTENT - CENTRALIZED ===== */
 .bpm-node-description {
-  font-size: var(--nexa-font-size-xs);
-  color: var(--nexa-text-muted);
-  line-height: 1.4;
-  margin-bottom: var(--nexa-spacing-sm);
-  word-wrap: break-word;
+  font-size: 0.75rem !important;
+  color: rgba(255, 255, 255, 0.8) !important; /* Slightly transparent white */
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+  word-wrap: break-word !important;
 }
 
 .bpm-node-properties {
-  margin-bottom: var(--nexa-spacing-sm);
+  margin-bottom: 0.5rem !important;
 }
 
 .bpm-property {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--nexa-spacing-xs) 0;
-  border-bottom: 1px solid var(--nexa-border-primary);
-  font-size: var(--nexa-font-size-xs);
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0.25rem 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .bpm-property:last-child {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .bpm-property-label {
-  color: var(--nexa-text-muted);
-  font-weight: var(--nexa-font-medium);
+  font-size: 0.75rem !important;
+  color: rgba(255, 255, 255, 0.9) !important; /* Slightly transparent white */
+  font-weight: 500 !important;
 }
 
 .bpm-property-value {
-  color: var(--nexa-text-secondary);
-  font-weight: var(--nexa-font-normal);
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 0.75rem !important;
+  color: #ffffff !important; /* White text */
+  font-weight: 600 !important;
 }
 
-/* ===== GATEWAY SPECIFIC STYLES ===== */
-.bpm-gateway-conditions {
-  margin-bottom: var(--nexa-spacing-sm);
-  padding: var(--nexa-spacing-sm);
-  background: var(--nexa-bg-tertiary);
-  border-radius: var(--nexa-radius-sm);
-  border-left: 3px solid var(--nexa-accent);
-}
-
-.bpm-conditions-header {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-xs);
-  font-size: var(--nexa-font-size-xs);
-  font-weight: var(--nexa-font-semibold);
-  color: var(--nexa-text-secondary);
-  margin-bottom: var(--nexa-spacing-xs);
-}
-
-.bpm-condition {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--nexa-spacing-xs) 0;
-  font-size: var(--nexa-font-size-xs);
-}
-
-.bpm-condition-label {
-  color: var(--nexa-text-muted);
-  font-weight: var(--nexa-font-medium);
-}
-
-.bpm-condition-value {
-  color: var(--nexa-text-secondary);
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* ===== NODE STATUS ===== */
-.bpm-node-status {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-xs);
-  font-size: var(--nexa-font-size-xs);
-  font-weight: var(--nexa-font-medium);
-  margin-top: var(--nexa-spacing-sm);
-  padding: var(--nexa-spacing-xs) var(--nexa-spacing-sm);
-  background: var(--nexa-bg-tertiary);
-  border-radius: var(--nexa-radius-sm);
-}
-
-.bpm-status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--nexa-status-pending);
-  flex-shrink: 0;
-}
-
-.bpm-status-completed .bpm-status-dot {
-  background: var(--nexa-status-completed);
-}
-
-.bpm-status-running .bpm-status-dot {
-  background: var(--nexa-status-in-progress);
-}
-
-.bpm-status-failed .bpm-status-dot {
-  background: var(--nexa-status-failed);
-}
-
-.bpm-status-stuck .bpm-status-dot {
-  background: var(--nexa-status-stuck);
-}
-
-/* ===== EXECUTION TIME ===== */
-.bpm-execution-time {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-xs);
-  font-size: var(--nexa-font-size-xs);
-  color: var(--nexa-text-muted);
-  margin-top: var(--nexa-spacing-xs);
-}
-
-.bpm-decision-path {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-xs);
-  font-size: var(--nexa-font-size-xs);
-  color: var(--nexa-text-muted);
-  margin-top: var(--nexa-spacing-xs);
-  padding: var(--nexa-spacing-xs) var(--nexa-spacing-sm);
-  background: var(--nexa-bg-tertiary);
-  border-radius: var(--nexa-radius-sm);
-}
-
-/* ===== HANDLES ===== */
-.bpm-handle {
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--nexa-bg-primary);
-  border-radius: 50%;
-  transition: all var(--nexa-transition-normal);
-}
-
-.bpm-handle:hover {
-  transform: scale(1.3);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.bpm-handle-input {
-  background: var(--nexa-accent);
-}
-
-.bpm-handle-output {
-  background: var(--nexa-success);
-}
-
-/* ===== NODE TYPE SPECIFIC STYLES ===== */
+/* ===== NODE TYPES - CENTRALIZED ===== */
 
 /* Start Node */
 .bpm-start-node {
-  border-color: var(--nexa-success);
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #10b981 !important; /* Green border for start */
 }
 
-.bpm-start-node:hover {
-  border-color: var(--nexa-success);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+.bpm-start-node .bpm-node-icon {
+  background: rgba(16, 185, 129, 0.2) !important; /* Green background */
 }
 
-.bpm-start-node.selected {
-  border-color: var(--nexa-success);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-}
-
-/* Task Node */
-.bpm-task-node {
-  border-color: var(--nexa-accent);
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-}
-
-.bpm-task-node:hover {
-  border-color: var(--nexa-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-.bpm-task-node.selected {
-  border-color: var(--nexa-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-/* Gateway Node */
-.bpm-gateway-node {
-  border-color: var(--nexa-warning);
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-}
-
-.bpm-gateway-node:hover {
-  border-color: var(--nexa-warning);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
-}
-
-.bpm-gateway-node.selected {
-  border-color: var(--nexa-warning);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+.bpm-start-node .bpm-icon {
+  color: #10b981 !important; /* Green icon */
 }
 
 /* End Node */
 .bpm-end-node {
-  border-color: var(--nexa-error);
-  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #ef4444 !important; /* Red border for end */
 }
 
-.bpm-end-node:hover {
-  border-color: var(--nexa-error);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+.bpm-end-node .bpm-node-icon {
+  background: rgba(239, 68, 68, 0.2) !important; /* Red background */
 }
 
-.bpm-end-node.selected {
-  border-color: var(--nexa-error);
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+.bpm-end-node .bpm-icon {
+  color: #ef4444 !important; /* Red icon */
 }
 
-/* Subprocess Node */
-.bpm-subprocess-node {
-  border-color: var(--nexa-secondary);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border-style: dashed;
+/* Task Node */
+.bpm-task-node {
+  border-color: #3b82f6 !important; /* Blue border for tasks */
 }
 
-.bpm-subprocess-node:hover {
-  border-color: var(--nexa-secondary);
-  box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
+.bpm-task-node .bpm-node-icon {
+  background: rgba(59, 130, 246, 0.2) !important; /* Blue background */
 }
 
-.bpm-subprocess-node.selected {
-  border-color: var(--nexa-secondary);
-  box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.2);
+.bpm-task-node .bpm-icon {
+  color: #3b82f6 !important; /* Blue icon */
+}
+
+/* Gateway Node */
+.bpm-gateway-node {
+  border-color: #f59e0b !important; /* Orange border for gateways */
+}
+
+.bpm-gateway-node .bpm-node-icon {
+  background: rgba(245, 158, 11, 0.2) !important; /* Orange background */
+}
+
+.bpm-gateway-node .bpm-icon {
+  color: #f59e0b !important; /* Orange icon */
 }
 
 /* Event Node */
 .bpm-event-node {
-  border-color: var(--nexa-info);
-  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-color: #8b5cf6 !important; /* Purple border for events */
 }
 
-.bpm-event-node:hover {
-  border-color: var(--nexa-info);
-  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.2);
+.bpm-event-node .bpm-node-icon {
+  background: rgba(139, 92, 246, 0.2) !important; /* Purple background */
 }
 
-.bpm-event-node.selected {
-  border-color: var(--nexa-info);
-  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.2);
+.bpm-event-node .bpm-icon {
+  color: #8b5cf6 !important; /* Purple icon */
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes bpm-node-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-  }
+/* Subprocess Node */
+.bpm-subprocess-node {
+  border-color: #06b6d4 !important; /* Cyan border for subprocesses */
 }
 
-.bpm-node.running {
-  animation: bpm-node-pulse 2s infinite;
+.bpm-subprocess-node .bpm-node-icon {
+  background: rgba(6, 182, 212, 0.2) !important; /* Cyan background */
 }
 
-@keyframes bpm-status-blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0.3;
-  }
+.bpm-subprocess-node .bpm-icon {
+  color: #06b6d4 !important; /* Cyan icon */
 }
 
-.bpm-status-running .bpm-status-dot {
-  animation: bpm-status-blink 1.5s infinite;
+/* ===== NODE STATUS INDICATORS - CENTRALIZED ===== */
+.bpm-node-status {
+  position: absolute !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  border: 2px solid #111827 !important; /* Black border */
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+.bpm-status-active {
+  background: #10b981 !important; /* Green for active */
+}
+
+.bpm-status-completed {
+  background: #3b82f6 !important; /* Blue for completed */
+}
+
+.bpm-status-failed {
+  background: #ef4444 !important; /* Red for failed */
+}
+
+.bpm-status-pending {
+  background: #f59e0b !important; /* Orange for pending */
+}
+
+/* ===== NODE ACTIONS - CENTRALIZED ===== */
+.bpm-node-actions {
+  display: flex !important;
+  gap: 0.25rem !important;
+  margin-top: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.bpm-action-btn {
+  padding: 0.25rem 0.5rem !important;
+  background: rgba(255, 255, 255, 0.1) !important; /* Subtle white background */
+  color: #ffffff !important; /* White text */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 4px !important;
+  font-size: 0.7rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.bpm-action-btn:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== NODE HANDLES - CENTRALIZED ===== */
+.bpm-node .react-flow__handle {
+  width: 8px !important;
+  height: 8px !important;
+  background: #111827 !important; /* Black background */
+  border: 2px solid #ffffff !important; /* White border */
+  border-radius: 50% !important;
+}
+
+.bpm-node .react-flow__handle:hover {
+  background: #374151 !important; /* Darker gray on hover */
+  transform: scale(1.2) !important;
+}
+
+.bpm-node .react-flow__handle.connecting {
+  background: #10b981 !important; /* Green when connecting */
+}
+
+.bpm-node .react-flow__handle.valid {
+  background: #10b981 !important; /* Green when valid */
+}
+
+.bpm-node .react-flow__handle.invalid {
+  background: #ef4444 !important; /* Red when invalid */
+}
+
+/* ===== RESPONSIVE DESIGN - CENTRALIZED ===== */
 @media (max-width: 768px) {
-  .bpm-node {
-    min-width: 160px;
-    max-width: 250px;
-    padding: var(--nexa-spacing-sm);
-  }
-  
-  .bpm-node-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--nexa-spacing-xs);
+  .bpm-node,
+  .bpm-start-node,
+  .bpm-end-node,
+  .bpm-task-node,
+  .bpm-gateway-node,
+  .bpm-event-node,
+  .bpm-subprocess-node {
+    min-width: 150px !important;
+    max-width: 200px !important;
+    padding: 0.75rem !important;
   }
   
   .bpm-node-icon {
-    width: 24px;
-    height: 24px;
+    width: 24px !important;
+    height: 24px !important;
   }
   
   .bpm-node-icon .bpm-icon {
-    font-size: var(--nexa-font-size-base);
+    font-size: 1rem !important;
   }
   
   .bpm-node-title {
-    font-size: var(--nexa-font-size-xs);
+    font-size: 0.8rem !important;
   }
-}
-
-/* ===== UTILITY CLASSES ===== */
-.bpm-node-compact {
-  min-width: 150px;
-  max-width: 200px;
-  padding: var(--nexa-spacing-sm);
-}
-
-.bpm-node-compact .bpm-node-header {
-  margin-bottom: var(--nexa-spacing-xs);
-}
-
-.bpm-node-compact .bpm-node-description {
-  display: none;
-}
-
-.bpm-node-compact .bpm-node-properties {
-  display: none;
-}
-
-.bpm-node-compact .bpm-gateway-conditions {
-  display: none;
+  
+  .bpm-node-description {
+    font-size: 0.7rem !important;
+  }
 }

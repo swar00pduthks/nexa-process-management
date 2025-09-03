@@ -17,14 +17,40 @@ const NaturalLanguageInput = ({ onRuleGenerated }) => {
   const parseNaturalLanguage = (text) => {
     setIsProcessing(true);
     
-    // Simple NLP parsing logic
+    // Enhanced NLP parsing logic that generates structured rules
     const parsed = {
+      entities: [],
       conditions: [],
       actions: [],
-      logic: 'AND'
+      joinConditions: [],
+      logic: 'AND',
+      description: text
     };
 
-    // Extract conditions
+    // Extract entities from the text
+    const entityPatterns = [
+      { pattern: /customer\s+data/gi, type: 'customer', name: 'Customer Data', icon: '👥' },
+      { pattern: /sales\s+data/gi, type: 'sales', name: 'Sales Data', icon: '💰' },
+      { pattern: /inventory/gi, type: 'inventory', name: 'Inventory', icon: '📦' },
+      { pattern: /orders/gi, type: 'order', name: 'Orders', icon: '📋' },
+      { pattern: /payment/gi, type: 'payment', name: 'Payment', icon: '💳' },
+      { pattern: /support\s+ticket/gi, type: 'support', name: 'Support Ticket', icon: '🎫' },
+      { pattern: /system/gi, type: 'system', name: 'System', icon: '⚙️' }
+    ];
+
+    entityPatterns.forEach(({ pattern, type, name, icon }) => {
+      if (text.match(pattern)) {
+        parsed.entities.push({
+          type,
+          name,
+          icon,
+          attributes: getDefaultAttributes(type),
+          selectedAttributes: getDefaultAttributes(type)
+        });
+      }
+    });
+
+    // Extract conditions with better parsing
     const conditionPatterns = [
       /when\s+(.+?)\s+(?:and|or)\s+(.+?)\s+(?:then|,)/gi,
       /if\s+(.+?)\s+(?:and|or)\s+(.+?)\s+(?:then|,)/gi,
@@ -39,81 +65,183 @@ const NaturalLanguageInput = ({ onRuleGenerated }) => {
           const conditions = match.split(/\s+(?:and|or)\s+/i);
           conditions.forEach(condition => {
             if (condition.trim() && !condition.includes('then')) {
-              parsed.conditions.push({
-                description: condition.trim(),
-                field: extractField(condition),
-                operator: extractOperator(condition),
-                value: extractValue(condition)
-              });
+              const parsedCondition = parseCondition(condition.trim());
+              if (parsedCondition) {
+                parsed.conditions.push(parsedCondition);
+              }
             }
           });
         });
       }
     });
 
-    // Extract actions
+    // Extract actions with better parsing
     const actionPatterns = [
       /trigger\s+([^,\s]+)/gi,
       /create\s+([^,\s]+)/gi,
       /send\s+([^,\s]+)/gi,
-      /escalate\s+([^,\s]+)/gi
+      /escalate\s+([^,\s]+)/gi,
+      /notify\s+([^,\s]+)/gi
     ];
 
     actionPatterns.forEach(pattern => {
       const matches = text.match(pattern);
       if (matches) {
         matches.forEach(match => {
-          const action = match.split(/\s+/)[1];
-          parsed.actions.push({
-            description: match.trim(),
-            type: extractActionType(match),
-            jobName: action
-          });
+          const parsedAction = parseAction(match.trim());
+          if (parsedAction) {
+            parsed.actions.push(parsedAction);
+          }
         });
       }
     });
 
-    // Determine logic
-    if (text.toLowerCase().includes('and')) {
-      parsed.logic = 'AND';
-    } else if (text.toLowerCase().includes('or')) {
-      parsed.logic = 'OR';
+    // Create join conditions if multiple entities
+    if (parsed.entities.length > 1) {
+      parsed.joinConditions.push({
+        leftEntity: parsed.entities[0].type,
+        leftAttribute: 'business_date',
+        operator: '=',
+        rightEntity: parsed.entities[1].type,
+        rightAttribute: 'business_date'
+      });
+    }
+
+    // If no entities found, create default ones based on conditions
+    if (parsed.entities.length === 0) {
+      parsed.entities.push({
+        type: 'input',
+        name: 'Input Data',
+        icon: '📥',
+        attributes: ['data'],
+        selectedAttributes: ['data']
+      });
+    }
+
+    // If no conditions found, create a default one
+    if (parsed.conditions.length === 0) {
+      parsed.conditions.push({
+        name: 'Default Condition',
+        expression: 'data',
+        operator: 'not_empty',
+        value: ''
+      });
+    }
+
+    // If no actions found, create a default one
+    if (parsed.actions.length === 0) {
+      parsed.actions.push({
+        name: 'Default Action',
+        type: 'notification',
+        description: 'Process completed'
+      });
     }
 
     setIsProcessing(false);
     return parsed;
   };
 
-  const extractField = (condition) => {
+  const parseCondition = (conditionText) => {
+    const condition = {
+      name: conditionText,
+      expression: '',
+      operator: 'equals',
+      value: ''
+    };
+
+    // Parse specific condition patterns
+    if (conditionText.includes('ready')) {
+      condition.expression = 'status';
+      condition.operator = 'equals';
+      condition.value = 'ready';
+    } else if (conditionText.includes('low')) {
+      condition.expression = 'quantity';
+      condition.operator = 'less_than';
+      condition.value = 'threshold';
+    } else if (conditionText.includes('exceeds') || conditionText.includes('>')) {
+      condition.expression = extractFieldFromCondition(conditionText);
+      condition.operator = 'greater_than';
+      condition.value = extractValueFromCondition(conditionText);
+    } else if (conditionText.includes('same date')) {
+      condition.expression = 'business_date';
+      condition.operator = 'equals';
+      condition.value = '${business_date}';
+    } else if (conditionText.includes('payment issue')) {
+      condition.expression = 'payment_status';
+      condition.operator = 'equals';
+      condition.value = 'failed';
+    } else if (conditionText.includes('error rate')) {
+      condition.expression = 'error_rate';
+      condition.operator = 'greater_than';
+      condition.value = '5%';
+    } else {
+      // Default parsing
+      condition.expression = extractFieldFromCondition(conditionText);
+      condition.operator = 'not_empty';
+      condition.value = '';
+    }
+
+    return condition;
+  };
+
+  const parseAction = (actionText) => {
+    const action = {
+      name: '',
+      type: 'notification',
+      description: actionText
+    };
+
+    if (actionText.includes('trigger')) {
+      const jobName = actionText.replace(/trigger\s+/i, '');
+      action.name = `Trigger ${jobName}`;
+      action.type = 'trigger_job';
+      action.jobName = jobName;
+    } else if (actionText.includes('create')) {
+      const requestType = actionText.replace(/create\s+/i, '');
+      action.name = `Create ${requestType}`;
+      action.type = 'create_request';
+      action.requestType = requestType;
+    } else if (actionText.includes('send')) {
+      const notificationType = actionText.replace(/send\s+/i, '');
+      action.name = `Send ${notificationType}`;
+      action.type = 'send_notification';
+      action.notificationType = notificationType;
+    } else if (actionText.includes('escalate')) {
+      const target = actionText.replace(/escalate\s+to\s+/i, '');
+      action.name = `Escalate to ${target}`;
+      action.type = 'escalate';
+      action.target = target;
+    } else {
+      action.name = actionText;
+    }
+
+    return action;
+  };
+
+  const extractFieldFromCondition = (condition) => {
     const fieldPatterns = [
       /customer\s+data/gi,
       /sales\s+data/gi,
       /inventory/gi,
       /orders/gi,
       /revenue/gi,
-      /error\s+rate/gi
+      /error\s+rate/gi,
+      /payment/gi
     ];
 
     for (const pattern of fieldPatterns) {
       const match = condition.match(pattern);
       if (match) return match[0].toLowerCase().replace(/\s+/g, '_');
     }
-    return 'unknown_field';
+    return 'data';
   };
 
-  const extractOperator = (condition) => {
-    if (condition.includes('equals') || condition.includes('=')) return 'equals';
-    if (condition.includes('exceeds') || condition.includes('>')) return 'greater_than';
-    if (condition.includes('low') || condition.includes('<')) return 'less_than';
-    if (condition.includes('ready')) return 'is_ready';
-    return 'equals';
-  };
-
-  const extractValue = (condition) => {
+  const extractValueFromCondition = (condition) => {
     const valuePatterns = [
       /(\d+%)/g,
       /(\d+\s+minutes)/g,
       /(\d+\s+hours)/g,
+      /(\d+)/g,
       /(same\s+date)/g,
       /(low)/g,
       /(high)/g
@@ -126,12 +254,18 @@ const NaturalLanguageInput = ({ onRuleGenerated }) => {
     return '';
   };
 
-  const extractActionType = (action) => {
-    if (action.includes('trigger')) return 'trigger_job';
-    if (action.includes('create')) return 'create_request';
-    if (action.includes('send')) return 'send_notification';
-    if (action.includes('escalate')) return 'escalate';
-    return 'trigger_job';
+  const getDefaultAttributes = (entityType) => {
+    const attributeMap = {
+      customer: ['customer_id', 'name', 'email', 'status', 'business_date'],
+      sales: ['order_id', 'customer_id', 'amount', 'status', 'business_date'],
+      inventory: ['product_id', 'quantity', 'threshold', 'status'],
+      order: ['order_id', 'customer_id', 'amount', 'status'],
+      payment: ['payment_id', 'customer_id', 'amount', 'status'],
+      support: ['ticket_id', 'customer_id', 'priority', 'status'],
+      system: ['metric_name', 'value', 'timestamp', 'threshold'],
+      input: ['data', 'timestamp', 'source']
+    };
+    return attributeMap[entityType] || ['id', 'data'];
   };
 
   const handleGenerateFlow = () => {

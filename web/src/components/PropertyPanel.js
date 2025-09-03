@@ -185,6 +185,57 @@ const PropertyPanel = ({ node, onUpdate, onClose }) => {
       </div>
 
       <div className="form-group">
+        <label>Event Data:</label>
+        <div className="event-data-builder">
+          {Object.entries(localData.eventData || {}).map(([key, value], index) => (
+            <div key={index} className="event-data-item">
+              <input
+                type="text"
+                value={key}
+                placeholder="Event field name"
+                onChange={(e) => {
+                  const eventData = { ...localData.eventData };
+                  delete eventData[key];
+                  eventData[e.target.value] = value;
+                  setLocalData({ ...localData, eventData });
+                }}
+              />
+              <span className="mapping-arrow">:</span>
+              <input
+                type="text"
+                value={value}
+                placeholder="Event field value or expression"
+                onChange={(e) => {
+                  const eventData = { ...localData.eventData };
+                  eventData[key] = e.target.value;
+                  setLocalData({ ...localData, eventData });
+                }}
+              />
+              <button
+                className="remove-mapping"
+                onClick={() => {
+                  const eventData = { ...localData.eventData };
+                  delete eventData[key];
+                  setLocalData({ ...localData, eventData });
+                }}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          <button
+            className="add-mapping"
+            onClick={() => {
+              const eventData = { ...localData.eventData, '': '' };
+              setLocalData({ ...localData, eventData });
+            }}
+          >
+            + Add Event Field
+          </button>
+        </div>
+      </div>
+
+      <div className="form-group">
         <label>Context Mapping:</label>
         <div className="context-mapping-builder">
           {Object.entries(localData.contextMapping || {}).map(([key, value], index) => (

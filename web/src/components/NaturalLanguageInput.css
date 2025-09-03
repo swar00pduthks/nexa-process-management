@@ -6,6 +6,8 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(30, 60, 114, 0.1);
+  position: relative;
+  z-index: 10;
 }
 
 .input-section h3 {
@@ -38,6 +40,8 @@
 
 .suggestions {
   margin-top: 1.5rem;
+  position: relative;
+  z-index: 20;
 }
 
 .suggestions h4 {
@@ -51,6 +55,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
+  z-index: 25;
 }
 
 .template-btn {
@@ -64,16 +70,27 @@
   cursor: pointer;
   font-size: 0.9rem;
   text-align: left;
-  transition: var(--transition);
+  transition: all 0.2s ease-in-out;
   backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 30;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 .template-btn:hover {
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   color: white;
-  border-color: var(--primary-color);
+  border-color: #3b82f6;
   transform: translateY(-2px);
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  z-index: 35;
+}
+
+.template-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
 }
 
 .generate-btn {
@@ -89,6 +106,8 @@
   margin-top: 1.5rem;
   transition: var(--transition);
   box-shadow: var(--box-shadow);
+  position: relative;
+  z-index: 15;
 }
 
 .generate-btn:hover:not(:disabled) {
@@ -111,6 +130,8 @@
   border-radius: var(--border-radius);
   border-left: 4px solid var(--accent-color);
   backdrop-filter: blur(5px);
+  position: relative;
+  z-index: 15;
 }
 
 .suggestions-panel h4 {
@@ -135,6 +156,24 @@
 .suggestions-panel li:before {
   content: "💡 ";
   margin-right: 0.5rem;
+}
+
+/* Ensure proper stacking context for the entire component */
+.natural-language-input * {
+  position: relative;
+}
+
+/* Fix for any potential ReactFlow interference */
+.react-flow__pane {
+  z-index: 1 !important;
+}
+
+.react-flow__controls {
+  z-index: 5 !important;
+}
+
+.react-flow__minimap {
+  z-index: 5 !important;
 }
 
 /* Responsive Design */

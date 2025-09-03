@@ -141,66 +141,6 @@
   margin: 0.25rem 0 0 0;
 }
 
-/* Button Styles */
-.btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-primary {
-  background: var(--nexa-primary);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--nexa-primary-dark);
-}
-
-.btn-secondary {
-  background: var(--nexa-bg-hover);
-  color: var(--nexa-text-primary);
-  border: 1px solid var(--nexa-border-color);
-}
-
-.btn-secondary:hover {
-  background: var(--nexa-bg-tertiary);
-}
-
-.btn-success {
-  background: var(--nexa-success);
-  color: white;
-}
-
-.btn-success:hover {
-  background: var(--nexa-success-dark);
-}
-
-.btn-warning {
-  background: var(--nexa-warning);
-  color: white;
-}
-
-.btn-warning:hover {
-  background: var(--nexa-warning-dark);
-}
-
-.btn-danger {
-  background: var(--nexa-danger);
-  color: white;
-}
-
-.btn-danger:hover {
-  background: var(--nexa-danger-dark);
-}
-
 /* Status Indicators */
 .status-badge {
   padding: 0.25rem 0.75rem;

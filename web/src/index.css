@@ -1,8 +1,8 @@
-/* Nexa Business Process Management - Centralized Design System */
+/* ===== NEXA BUSINESS PROCESS MANAGEMENT - CENTRALIZED DESIGN SYSTEM ===== */
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  /* Color Palette - Nexa Lineage Design */
+  /* Color Palette - Standard Design */
   --nexa-primary: #111827;
   --nexa-secondary: #374151;
   --nexa-accent: #3b82f6;
@@ -98,393 +98,608 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* ===== UTILITY CLASSES ===== */
-
-/* Layout */
-.nexa-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--nexa-spacing-xl);
+/* ===== CENTRALIZED BUTTON SYSTEM ===== */
+/* Base Button Styles - ALWAYS VISIBLE */
+.btn,
+button,
+[class*="btn-"],
+[class*="-btn"],
+.add-btn,
+.correlation-btn,
+.action-btn,
+.remove-btn,
+.save-btn,
+.cancel-btn,
+.edit-btn,
+.delete-btn,
+.generate-btn,
+.template-btn,
+.test-flow-btn,
+.chat-toggle-btn,
+.filter-btn,
+.create-process-btn,
+.create-correlation-btn,
+.back-button,
+.action-button,
+.close-button,
+.bpm-view-btn,
+.bpm-btn,
+.bpm-canvas-btn,
+.btn-relationship,
+.btn-orchestration,
+.btn-create-relationship,
+.add-to-phase-btn,
+.remove-calc-btn,
+.modal-btn,
+.btn-save,
+.btn-cancel,
+.add-mapping,
+.remove-mapping {
+  /* Base Button Properties */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 8px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  font-family: var(--nexa-font-family) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  border: 1px solid !important;
+  white-space: nowrap !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  
+  /* CRITICAL: Ensure buttons are always visible */
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 10 !important;
+  background: #111827 !important;
+  color: #ffffff !important;
+  border-color: #111827 !important;
 }
 
-.nexa-flex {
-  display: flex;
+/* Button Hover States */
+.btn:hover,
+button:hover,
+[class*="btn-"]:hover,
+[class*="-btn"]:hover,
+.add-btn:hover,
+.correlation-btn:hover,
+.action-btn:hover,
+.save-btn:hover,
+.edit-btn:hover,
+.generate-btn:hover,
+.template-btn:hover,
+.test-flow-btn:hover,
+.chat-toggle-btn:hover,
+.filter-btn:hover,
+.create-process-btn:hover,
+.create-correlation-btn:hover,
+.back-button:hover,
+.action-button:hover,
+.bpm-view-btn:hover,
+.bpm-btn:hover,
+.bpm-canvas-btn:hover,
+.btn-relationship:hover,
+.btn-orchestration:hover,
+.btn-create-relationship:hover,
+.add-to-phase-btn:hover,
+.modal-btn:hover,
+.btn-save:hover,
+.add-mapping:hover {
+  background: #374151 !important;
+  border-color: #374151 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
-.nexa-flex-center {
+/* Secondary Button Variants */
+.btn-secondary,
+.cancel-btn:hover,
+.btn-cancel:hover,
+.remove-btn:hover,
+.delete-btn:hover,
+.close-button:hover,
+.remove-calc-btn:hover,
+.remove-mapping:hover {
+  background: #ffffff !important;
+  color: #111827 !important;
+  border-color: #e5e7eb !important;
+}
+
+.btn-secondary:hover,
+.cancel-btn:hover,
+.btn-cancel:hover {
+  background: #f9fafb !important;
+  border-color: #d1d5db !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Danger Button Variants */
+.remove-btn,
+.delete-btn,
+.close-button,
+.remove-calc-btn,
+.remove-mapping {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+  border-color: #ef4444 !important;
+}
+
+.remove-btn:hover,
+.delete-btn:hover,
+.close-button:hover,
+.remove-calc-btn:hover,
+.remove-mapping:hover {
+  background: #dc2626 !important;
+  border-color: #dc2626 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Success Button Variants */
+.btn-success,
+.add-to-phase-btn {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+}
+
+.btn-success:hover,
+.add-to-phase-btn:hover {
+  background: #059669 !important;
+  border-color: #059669 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Warning Button Variants */
+.btn-warning {
+  background: #f59e0b !important;
+  color: #ffffff !important;
+  border-color: #f59e0b !important;
+}
+
+.btn-warning:hover {
+  background: #d97706 !important;
+  border-color: #d97706 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Disabled Button States */
+.btn:disabled,
+button:disabled,
+[class*="btn-"]:disabled,
+[class*="-btn"]:disabled,
+.add-btn:disabled,
+.correlation-btn:disabled,
+.action-btn:disabled,
+.save-btn:disabled,
+.cancel-btn:disabled,
+.edit-btn:disabled,
+.delete-btn:disabled,
+.generate-btn:disabled,
+.template-btn:disabled,
+.test-flow-btn:disabled,
+.chat-toggle-btn:disabled,
+.filter-btn:disabled,
+.create-process-btn:disabled,
+.create-correlation-btn:disabled,
+.back-button:disabled,
+.action-button:disabled,
+.close-button:disabled,
+.bpm-view-btn:disabled,
+.bpm-btn:disabled,
+.bpm-canvas-btn:disabled,
+.btn-relationship:disabled,
+.btn-orchestration:disabled,
+.btn-create-relationship:disabled,
+.add-to-phase-btn:disabled,
+.remove-calc-btn:disabled,
+.modal-btn:disabled,
+.btn-save:disabled,
+.btn-cancel:disabled,
+.add-mapping:disabled,
+.remove-mapping:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Special Button Sizes */
+.btn-sm,
+.add-btn,
+.correlation-btn,
+.action-btn,
+.remove-btn,
+.edit-btn,
+.delete-btn,
+.generate-btn,
+.template-btn,
+.test-flow-btn,
+.chat-toggle-btn,
+.filter-btn,
+.create-process-btn,
+.create-correlation-btn,
+.back-button,
+.action-button,
+.close-button,
+.bpm-view-btn,
+.bpm-btn,
+.bpm-canvas-btn,
+.btn-relationship,
+.btn-orchestration,
+.btn-create-relationship,
+.add-to-phase-btn,
+.remove-calc-btn,
+.modal-btn,
+.add-mapping,
+.remove-mapping {
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.8rem !important;
+}
+
+.btn-lg,
+.save-btn,
+.cancel-btn,
+.btn-save,
+.btn-cancel {
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1rem !important;
+}
+
+/* Circular Buttons */
+.remove-btn,
+.delete-btn,
+.close-button,
+.remove-calc-btn,
+.remove-mapping {
+  border-radius: 50% !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ===== CENTRALIZED BACKGROUND SYSTEM ===== */
+/* Main Background */
+body,
+.App,
+.app-main,
+.main-content {
+  background-color: var(--nexa-bg-secondary) !important;
+}
+
+/* Component Backgrounds */
+.card,
+.modal-content,
+.property-panel,
+.process-builder,
+.builder-section,
+.phase-item,
+.panel-content,
+.sidebar,
+.chat-container,
+.flow-builder,
+.natural-language-input,
+.dashboard,
+.process-orchestrator,
+.bpm-interface,
+.data-source-panel,
+.event-correlation,
+.rule-configuration {
+  background-color: var(--nexa-bg-primary) !important;
+}
+
+/* Secondary Backgrounds */
+.card-header,
+.card-footer,
+.panel-header,
+.panel-actions,
+.modal-header,
+.modal-footer,
+.section-header,
+.phase-header {
+  background-color: var(--nexa-bg-secondary) !important;
+}
+
+/* Tertiary Backgrounds */
+.form-control,
+input,
+textarea,
+select,
+.phase-name-input,
+.phase-description-input {
+  background-color: var(--nexa-bg-primary) !important;
+}
+
+/* ===== CENTRALIZED FORM STYLES ===== */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.9rem;
+}
+
+.form-control,
+input,
+textarea,
+select,
+.phase-name-input,
+.phase-description-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  color: #111827;
+  font-family: var(--nexa-font-family);
+}
+
+.form-control:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.phase-name-input:focus,
+.phase-description-input:focus {
+  outline: none;
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* ===== CENTRALIZED CARD STYLES ===== */
+.card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+/* ===== CENTRALIZED MODAL STYLES ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
 }
 
-.nexa-flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.modal-content {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
 }
 
-.nexa-grid {
-  display: grid;
-}
-
-.nexa-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-.nexa-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.nexa-grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.nexa-grid-cols-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
-/* Spacing */
-.nexa-gap-xs { gap: var(--nexa-spacing-xs); }
-.nexa-gap-sm { gap: var(--nexa-spacing-sm); }
-.nexa-gap-md { gap: var(--nexa-spacing-md); }
-.nexa-gap-lg { gap: var(--nexa-spacing-lg); }
-.nexa-gap-xl { gap: var(--nexa-spacing-xl); }
-
-.nexa-p-xs { padding: var(--nexa-spacing-xs); }
-.nexa-p-sm { padding: var(--nexa-spacing-sm); }
-.nexa-p-md { padding: var(--nexa-spacing-md); }
-.nexa-p-lg { padding: var(--nexa-spacing-lg); }
-.nexa-p-xl { padding: var(--nexa-spacing-xl); }
-
-.nexa-m-xs { margin: var(--nexa-spacing-xs); }
-.nexa-m-sm { margin: var(--nexa-spacing-sm); }
-.nexa-m-md { margin: var(--nexa-spacing-md); }
-.nexa-m-lg { margin: var(--nexa-spacing-lg); }
-.nexa-m-xl { margin: var(--nexa-spacing-xl); }
-
-/* Typography */
-.nexa-text-xs { font-size: var(--nexa-font-size-xs); }
-.nexa-text-sm { font-size: var(--nexa-font-size-sm); }
-.nexa-text-base { font-size: var(--nexa-font-size-base); }
-.nexa-text-lg { font-size: var(--nexa-font-size-lg); }
-.nexa-text-xl { font-size: var(--nexa-font-size-xl); }
-.nexa-text-2xl { font-size: var(--nexa-font-size-2xl); }
-.nexa-text-3xl { font-size: var(--nexa-font-size-3xl); }
-
-.nexa-font-normal { font-weight: var(--nexa-font-normal); }
-.nexa-font-medium { font-weight: var(--nexa-font-medium); }
-.nexa-font-semibold { font-weight: var(--nexa-font-semibold); }
-.nexa-font-bold { font-weight: var(--nexa-font-bold); }
-
-.nexa-text-primary { color: var(--nexa-text-primary); }
-.nexa-text-secondary { color: var(--nexa-text-secondary); }
-.nexa-text-muted { color: var(--nexa-text-muted); }
-.nexa-text-light { color: var(--nexa-text-light); }
-
-/* Backgrounds */
-.nexa-bg-primary { background-color: var(--nexa-bg-primary); }
-.nexa-bg-secondary { background-color: var(--nexa-bg-secondary); }
-.nexa-bg-tertiary { background-color: var(--nexa-bg-tertiary); }
-
-/* Borders */
-.nexa-border { border: 1px solid var(--nexa-border-primary); }
-.nexa-border-secondary { border: 1px solid var(--nexa-border-secondary); }
-
-.nexa-rounded-sm { border-radius: var(--nexa-radius-sm); }
-.nexa-rounded-md { border-radius: var(--nexa-radius-md); }
-.nexa-rounded-lg { border-radius: var(--nexa-radius-lg); }
-.nexa-rounded-xl { border-radius: var(--nexa-radius-xl); }
-
-/* Shadows */
-.nexa-shadow-sm { box-shadow: var(--nexa-shadow-sm); }
-.nexa-shadow-md { box-shadow: var(--nexa-shadow-md); }
-.nexa-shadow-lg { box-shadow: var(--nexa-shadow-lg); }
-.nexa-shadow-xl { box-shadow: var(--nexa-shadow-xl); }
-.nexa-shadow-2xl { box-shadow: var(--nexa-shadow-2xl); }
-
-/* Status Colors */
-.nexa-status-completed { color: var(--nexa-status-completed); }
-.nexa-status-in-progress { color: var(--nexa-status-in-progress); }
-.nexa-status-failed { color: var(--nexa-status-failed); }
-.nexa-status-stuck { color: var(--nexa-status-stuck); }
-.nexa-status-pending { color: var(--nexa-status-pending); }
-
-/* ===== COMPONENT CLASSES ===== */
-
-/* Header */
-.nexa-header {
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--nexa-spacing-lg) var(--nexa-spacing-xl);
-  background: var(--nexa-bg-primary);
-  border-bottom: 1px solid var(--nexa-border-primary);
-  box-shadow: var(--nexa-shadow-sm);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.nexa-header-left { flex: 1; }
-.nexa-header-center { flex: 2; text-align: center; }
-.nexa-header-right { flex: 1; display: flex; justify-content: flex-end; }
-
-/* Logo */
-.nexa-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--nexa-spacing-md);
-}
-
-.nexa-logo-icon {
-  font-size: var(--nexa-font-size-2xl);
-  color: var(--nexa-text-primary);
-}
-
-.nexa-logo-text h1 {
-  font-size: var(--nexa-font-size-3xl);
-  font-weight: var(--nexa-font-bold);
-  color: var(--nexa-text-primary);
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
   margin: 0;
-  line-height: 1.2;
 }
 
-.nexa-logo-text p {
-  font-size: var(--nexa-font-size-sm);
-  color: var(--nexa-text-muted);
-  margin: var(--nexa-spacing-xs) 0 0 0;
-  line-height: 1.4;
-}
-
-/* Buttons */
-.nexa-button {
+.modal-close {
   background: none;
   border: none;
-  font-size: var(--nexa-font-size-sm);
-  font-weight: var(--nexa-font-medium);
+  font-size: 1.5rem;
   cursor: pointer;
-  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
-  border-radius: var(--nexa-radius-md);
-  transition: all var(--nexa-transition-normal);
-  color: var(--nexa-text-muted);
+  color: #6b7280;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
-.nexa-button:hover {
-  color: var(--nexa-text-secondary);
-  background-color: var(--nexa-bg-tertiary);
+.modal-close:hover {
+  background: #f3f4f6;
+  color: #111827;
 }
 
-.nexa-button-primary {
-  background-color: var(--nexa-secondary);
-  color: white;
-  border: 1px solid var(--nexa-secondary);
+.modal-body {
+  margin-bottom: 1.5rem;
 }
 
-.nexa-button-primary:hover {
-  background-color: var(--nexa-primary);
-  color: white;
-}
-
-.nexa-button-close {
-  font-size: var(--nexa-font-size-xl);
-  padding: var(--nexa-spacing-sm);
-  width: 2rem;
-  height: 2rem;
+.modal-footer {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
 }
 
-/* Cards */
-.nexa-card {
-  background: var(--nexa-bg-primary);
-  border-radius: var(--nexa-radius-lg);
-  box-shadow: var(--nexa-shadow-md);
-  padding: var(--nexa-spacing-lg);
-  border: 1px solid var(--nexa-border-primary);
-  transition: box-shadow var(--nexa-transition-normal);
-}
+/* ===== UTILITY CLASSES ===== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
 
-.nexa-card:hover {
-  box-shadow: var(--nexa-shadow-lg);
-}
+.text-primary { color: #111827; }
+.text-secondary { color: #374151; }
+.text-muted { color: #6b7280; }
+.text-light { color: #9ca3af; }
 
-.nexa-card-icon {
-  font-size: var(--nexa-font-size-xl);
-  color: var(--nexa-text-primary);
-  margin-bottom: var(--nexa-spacing-md);
-}
+.bg-primary { background-color: #111827; }
+.bg-secondary { background-color: #374151; }
+.bg-white { background-color: #ffffff; }
+.bg-light { background-color: #f8fafc; }
 
-.nexa-card-title {
-  font-size: var(--nexa-font-size-lg);
-  font-weight: var(--nexa-font-semibold);
-  color: var(--nexa-text-primary);
-  margin: 0 0 var(--nexa-spacing-sm) 0;
-}
+.border { border: 1px solid #e5e7eb; }
+.border-top { border-top: 1px solid #e5e7eb; }
+.border-bottom { border-bottom: 1px solid #e5e7eb; }
+.border-left { border-left: 1px solid #e5e7eb; }
+.border-right { border-right: 1px solid #e5e7eb; }
 
-.nexa-card-description {
-  font-size: var(--nexa-font-size-sm);
-  color: var(--nexa-text-muted);
-  margin: 0 0 var(--nexa-spacing-lg) 0;
-  line-height: 1.5;
-}
+.rounded { border-radius: 8px; }
+.rounded-sm { border-radius: 4px; }
+.rounded-lg { border-radius: 12px; }
+.rounded-full { border-radius: 9999px; }
 
-/* Badges */
-.nexa-badge {
-  background: var(--nexa-bg-tertiary);
-  color: var(--nexa-text-muted);
-  padding: var(--nexa-spacing-xs) var(--nexa-spacing-md);
-  border-radius: 1rem;
-  font-size: var(--nexa-font-size-xs);
-  font-weight: var(--nexa-font-medium);
-  border: 1px solid var(--nexa-border-primary);
-}
+.shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+.shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+.shadow-lg { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
 
-.nexa-badge-status {
-  background: #fef3c7;
-  border-color: #fbbf24;
-}
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.p-6 { padding: 1.5rem; }
 
-/* Progress Bars */
-.nexa-progress-bar {
-  width: 100%;
-  height: 0.5rem;
-  background-color: var(--nexa-bg-tertiary);
-  border-radius: var(--nexa-radius-sm);
-  overflow: hidden;
-  margin-bottom: var(--nexa-spacing-sm);
-}
+.m-0 { margin: 0; }
+.m-1 { margin: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+.m-3 { margin: 0.75rem; }
+.m-4 { margin: 1rem; }
+.m-5 { margin: 1.25rem; }
+.m-6 { margin: 1.5rem; }
 
-.nexa-progress-fill {
-  height: 100%;
-  border-radius: var(--nexa-radius-sm);
-  transition: width var(--nexa-transition-slow);
-}
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.mb-6 { margin-bottom: 1.5rem; }
 
-.nexa-progress-text {
-  font-size: var(--nexa-font-size-xs);
-  color: var(--nexa-text-muted);
-}
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-5 { margin-top: 1.25rem; }
+.mt-6 { margin-top: 1.5rem; }
 
-/* Inputs */
-.nexa-input {
-  width: 100%;
-  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
-  border: 1px solid var(--nexa-border-primary);
-  border-radius: var(--nexa-radius-md);
-  font-size: var(--nexa-font-size-sm);
-  color: var(--nexa-text-primary);
-  background-color: var(--nexa-bg-primary);
-  transition: border-color var(--nexa-transition-normal);
-}
+.d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
+.d-block { display: block; }
+.d-inline-block { display: inline-block; }
+.d-none { display: none; }
 
-.nexa-input:focus {
-  outline: none;
-  border-color: var(--nexa-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
+.justify-content-center { justify-content: center; }
+.justify-content-start { justify-content: flex-start; }
+.justify-content-end { justify-content: flex-end; }
+.justify-content-between { justify-content: space-between; }
+.justify-content-around { justify-content: space-around; }
 
-/* Select */
-.nexa-select {
-  width: 100%;
-  padding: var(--nexa-spacing-sm) var(--nexa-spacing-md);
-  border: 1px solid var(--nexa-border-primary);
-  border-radius: var(--nexa-radius-md);
-  font-size: var(--nexa-font-size-sm);
-  color: var(--nexa-text-primary);
-  background-color: var(--nexa-bg-primary);
-  cursor: pointer;
-  transition: border-color var(--nexa-transition-normal);
-}
+.align-items-center { align-items: center; }
+.align-items-start { align-items: flex-start; }
+.align-items-end { align-items: flex-end; }
+.align-items-stretch { align-items: stretch; }
 
-.nexa-select:focus {
-  outline: none;
-  border-color: var(--nexa-accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
 
-/* ===== REACT FLOW CUSTOMIZATION ===== */
-.react-flow__node {
-  border-radius: var(--nexa-radius-lg);
-  border: 1px solid var(--nexa-border-primary);
-  background: var(--nexa-bg-primary);
-  box-shadow: var(--nexa-shadow-md);
-  transition: box-shadow var(--nexa-transition-normal);
-}
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
 
-.react-flow__node:hover {
-  box-shadow: var(--nexa-shadow-lg);
-}
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-fixed { position: fixed; }
 
-.react-flow__handle {
-  background: var(--nexa-secondary);
-  border: 2px solid var(--nexa-bg-primary);
-  width: 8px;
-  height: 8px;
-}
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-scroll { overflow: scroll; }
 
-.react-flow__edge-path {
-  stroke: var(--nexa-accent);
-  stroke-width: 2;
-}
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
 
-.react-flow__controls {
-  background: var(--nexa-bg-primary);
-  border: 1px solid var(--nexa-border-primary);
-  border-radius: var(--nexa-radius-lg);
-  box-shadow: var(--nexa-shadow-md);
-}
+.user-select-none { user-select: none; }
 
-.react-flow__controls-button {
-  background: var(--nexa-bg-primary);
-  border: none;
-  color: var(--nexa-text-muted);
-  padding: var(--nexa-spacing-sm);
-  border-radius: var(--nexa-radius-sm);
-}
-
-.react-flow__controls-button:hover {
-  background: var(--nexa-bg-tertiary);
-  color: var(--nexa-text-secondary);
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== RESPONSIVE UTILITIES ===== */
 @media (max-width: 768px) {
-  .nexa-container {
-    padding: 0 var(--nexa-spacing-lg);
-  }
+  .d-md-none { display: none; }
+  .d-md-block { display: block; }
+  .d-md-flex { display: flex; }
   
-  .nexa-header {
-    flex-direction: column;
-    gap: var(--nexa-spacing-md);
-    padding: var(--nexa-spacing-md);
-  }
-  
-  .nexa-header-center {
-    order: 1;
-  }
-  
-  .nexa-header-left {
-    order: 2;
-    align-self: flex-start;
-  }
-  
-  .nexa-header-right {
-    order: 3;
-    align-self: flex-end;
-  }
-  
-  .nexa-grid-cols-auto {
-    grid-template-columns: 1fr;
-  }
-  
-  .nexa-logo-text h1 {
-    font-size: var(--nexa-font-size-2xl);
-  }
+  .text-md-center { text-align: center; }
+  .text-md-left { text-align: left; }
+  .text-md-right { text-align: right; }
 }
 
-/* ===== SCROLLBAR STYLING ===== */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@media (min-width: 769px) {
+  .d-lg-none { display: none; }
+  .d-lg-block { display: block; }
+  .d-lg-flex { display: flex; }
+  
+  .text-lg-center { text-align: center; }
+  .text-lg-left { text-align: left; }
+  .text-lg-right { text-align: right; }
 }
 
-::-webkit-scrollbar-track {
-  background: var(--nexa-bg-tertiary);
-  border-radius: var(--nexa-radius-sm);
+/* ===== REACTFLOW OVERRIDES ===== */
+/* Ensure ReactFlow doesn't interfere with our button visibility */
+.react-flow__controls,
+.react-flow__controls button,
+.react-flow__node,
+.react-flow__edge,
+.react-flow__handle {
+  z-index: 1 !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--nexa-border-secondary);
-  border-radius: var(--nexa-radius-sm);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--nexa-text-muted);
+/* ===== IMPORTANT OVERRIDES ===== */
+/* Override any conflicting styles from other CSS files */
+*[class*="btn"],
+*[class*="button"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 10 !important;
 }

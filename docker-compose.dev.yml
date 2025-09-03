@@ -1,0 +1,141 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: nexa-postgres-dev
+    environment:
+      POSTGRES_DB: nexa_process_management_dev
+      POSTGRES_USER: nexa_user
+      POSTGRES_PASSWORD: nexa_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./api/src/main/resources/db/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - nexa-dev-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexa_user -d nexa_process_management_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Spring Boot API (Development with hot reload)
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    container_name: nexa-api-dev
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - DB_USERNAME=nexa_user
+      - DB_PASSWORD=nexa_password
+      - JWT_SECRET=nexa-process-management-dev-secret-key-2024
+      - JWT_EXPIRATION=86400000
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin123
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api/src:/app/src
+      - ./api/target:/app/target
+      - maven_cache:/root/.m2
+    networks:
+      - nexa-dev-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/api/v1/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
+    command: ["mvn", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:5005'"]
+    profiles:
+      - debug
+
+  # React Web Application (Development with hot reload)
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    container_name: nexa-web-dev
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/api/v1
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web/src:/app/src
+      - ./web/public:/app/public
+      - node_modules:/app/node_modules
+    networks:
+      - nexa-dev-network
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    command: ["npm", "start"]
+
+  # Redis Cache (Development)
+  redis:
+    image: redis:7-alpine
+    container_name: nexa-redis-dev
+    ports:
+      - "6379:6379"
+    networks:
+      - nexa-dev-network
+    volumes:
+      - redis_dev_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # pgAdmin (Database Management)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: nexa-pgadmin-dev
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@nexadata.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    networks:
+      - nexa-dev-network
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+  maven_cache:
+    driver: local
+  node_modules:
+    driver: local
+
+networks:
+  nexa-dev-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+
